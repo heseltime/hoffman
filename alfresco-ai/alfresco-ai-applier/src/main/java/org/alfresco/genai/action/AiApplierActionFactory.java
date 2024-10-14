@@ -29,6 +29,12 @@ public class AiApplierActionFactory {
     AiApplierDescription aiApplierDescription;
 
     /**
+     * Action that creates A11y for Alfresco documents.
+     */
+    @Autowired
+    AiApplierA11y aiApplierA11y;
+
+    /**
      * Returns the appropriate {@link AiApplierAction} instance based on the specified action.
      *
      * @param action The type of AI action to be performed.
@@ -40,6 +46,7 @@ public class AiApplierActionFactory {
             case SUMMARY -> aiApplierSummary;
             case CLASSIFY -> aiApplierClassify;
             case DESCRIBE -> aiApplierDescription;
+            case A11Y -> aiApplierA11y;
             default -> throw new RuntimeException("Action " + action + " is not supported!");
         };
     }

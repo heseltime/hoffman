@@ -12,7 +12,7 @@ public interface AiApplierAction {
      * Enumeration of supported AI actions.
      */
     enum Action {
-        SUMMARY, CLASSIFY, DESCRIBE
+        SUMMARY, CLASSIFY, DESCRIBE, A11Y
     }
 
     /**

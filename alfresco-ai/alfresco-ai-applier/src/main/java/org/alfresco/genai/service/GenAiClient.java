@@ -157,4 +157,29 @@ public class GenAiClient {
 
     }
 
+    /**
+     * Working from getSummary ... still returns Summary for now
+     */
+    public Summary getA11y(File pdfFile) throws IOException {
+
+        RequestBody requestBody = new MultipartBody
+                .Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", pdfFile.getName(), RequestBody.create(pdfFile, MediaType.parse("application/pdf")))
+                .build();
+
+        Request request = new Request
+                .Builder()
+                .url(genaiUrl + "/summary")
+                .post(requestBody)
+                .build();
+
+        String response = client.newCall(request).execute().body().string();
+        Map<String, Object> aiResponse = JSON_PARSER.parseMap(response);
+        return new Summary()
+                .summary(aiResponse.get("summary").toString().trim())
+                .tags(Arrays.asList(aiResponse.get("tags").toString().split(",", -1)))
+                .model(aiResponse.get("model").toString());
+    }
+
 }
