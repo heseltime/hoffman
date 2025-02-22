@@ -19,6 +19,8 @@ from chains import (
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
+from docling.document_converter import DocumentConverter
+
 from dotenv import load_dotenv
 
 load_dotenv(".env")
@@ -168,3 +170,32 @@ async def summary(file: UploadFile):
     tags_result = qa.run(tags_query, callbacks=[stream_handler])
 
     return {"summary": summary_result, "tags": tags_result, "model": llm_name}
+
+# Define the DocumentConverter
+converter = DocumentConverter()
+
+@app.post("/jsonify")
+async def jsonify(file: UploadFile):
+    """
+    Endpoint to process an uploaded PDF file and output JSON format.
+    """
+    try:
+        # Save the uploaded file temporarily
+        temp_file_path = f"temp_{file.filename}"
+        with open(temp_file_path, "wb") as temp_file:
+            temp_file.write(await file.read())
+
+        # Convert the document using Docling
+        result = converter.convert(temp_file_path)
+
+        # Export the result to a JSON-compatible dictionary
+        json_output = result.document.export_to_dict()
+
+        # Clean up temporary file
+        os.remove(temp_file_path)
+
+        # Return JSON output
+        return {"document": json_output, "status": "success"}
+
+    except Exception as e:
+        return {"error": str(e), "status": "failure"}

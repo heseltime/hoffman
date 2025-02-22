@@ -134,5 +134,19 @@
                 </property>
             </properties>
         </aspect>
+        <aspect name="genai:accessibility-checkable">
+            <title>Accessibility-checkable (with AI)</title>
+            <properties>
+                <property name="genai:accessibility-score">
+                    <title>Score</title>
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <index enabled="true">
+                        <tokenised>true</tokenised>
+                        <facetable>false</facetable>
+                    </index>
+                </property>
+            </properties>
+        </aspect>
     </aspects>
 </model>

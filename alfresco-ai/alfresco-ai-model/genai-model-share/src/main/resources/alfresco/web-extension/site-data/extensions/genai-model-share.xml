@@ -15,6 +15,7 @@
               <aspect label="Promptable with AI" name="genai:promptable"/>
               <aspect label="Classifiable with AI" name="genai:classifiable"/>
               <aspect label="Descriptable with AI" name="genai:descriptable"/>
+              <aspect label="Accessibility-Checkable (with AI)" name="genai:accessibility-checkable"/>
             </visible>
           </aspects>
         </config>
@@ -121,6 +122,20 @@
                 <field id="genai:description" read-only="true" set="genai:descriptable_cmm_set0">
                   <control template="/org/alfresco/components/form/controls/textfield.ftl">
                   </control>
+                </field>
+              </appearance>
+            </form>
+          </forms>
+        </config>
+        <config condition="genai:accessibility-checkable" evaluator="aspect">
+          <forms>
+            <form>
+              <field-visibility>
+                <show id="genai:accessibility-score"/>
+              </field-visibility>
+              <appearance>
+                <set appearance="title" id="genai:accessibility-checkable_cmm_set0" label-id="Checking"/>
+                <field id="genai:accessibility-score" set="genai:accessibility-checkable_cmm_set0">
                 </field>
               </appearance>
             </form>
