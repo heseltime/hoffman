@@ -127,15 +127,15 @@
             </form>
           </forms>
         </config>
-        <config condition="genai:accessibility-checkable" evaluator="aspect">
+        <config condition="genai:accessibilityCheckable" evaluator="aspect">
           <forms>
             <form>
               <field-visibility>
-                <show id="genai:accessibility-score"/>
+                <show id="genai:accessibilityScore"/>
               </field-visibility>
               <appearance>
-                <set appearance="title" id="genai:accessibility-checkable_cmm_set0" label-id="Checking"/>
-                <field id="genai:accessibility-score" set="genai:accessibility-checkable_cmm_set0">
+                <set appearance="title" id="genai:accessibilityCheckable_cmm_set0" label-id="Checking"/>
+                <field id="genai:accessibilityScore" set="genai:accessibilityCheckable_cmm_set0">
                 </field>
               </appearance>
             </form>

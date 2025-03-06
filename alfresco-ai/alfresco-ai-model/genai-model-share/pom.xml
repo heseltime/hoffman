@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco</groupId>
     <artifactId>genai-model-share</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>genai-model-share</name>
     <description>AI Model Share JAR Module (to be included in the share.war)</description>
     <packaging>jar</packaging>

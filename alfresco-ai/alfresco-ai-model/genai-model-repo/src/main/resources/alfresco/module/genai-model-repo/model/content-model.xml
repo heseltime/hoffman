@@ -134,10 +134,10 @@
                 </property>
             </properties>
         </aspect>
-        <aspect name="genai:accessibility-checkable">
+        <aspect name="genai:accessibilityCheckable">
             <title>Accessibility-checkable (with AI)</title>
             <properties>
-                <property name="genai:accessibility-score">
+                <property name="genai:accessibilityScore">
                     <title>Score</title>
                     <type>d:text</type>
                     <mandatory>false</mandatory>
