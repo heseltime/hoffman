@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.alfresco</groupId>
     <artifactId>genai-model-repo</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>genai-model-repo Platform/Repository JAR Module</name>
     <description>Platform/Repo JAR Module (to be included in the alfresco.war)</description>
     <packaging>jar</packaging>

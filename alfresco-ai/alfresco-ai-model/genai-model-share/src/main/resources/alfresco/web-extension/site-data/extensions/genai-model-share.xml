@@ -15,7 +15,7 @@
               <aspect label="Promptable with AI" name="genai:promptable"/>
               <aspect label="Classifiable with AI" name="genai:classifiable"/>
               <aspect label="Descriptable with AI" name="genai:descriptable"/>
-              <aspect label="Accessibility-Checkable (with AI)" name="genai:accessibility-checkable"/>
+              <aspect label="Accessibility-Checkable (with AI)" name="genai:accessibilityCheckable"/>
             </visible>
           </aspects>
         </config>
