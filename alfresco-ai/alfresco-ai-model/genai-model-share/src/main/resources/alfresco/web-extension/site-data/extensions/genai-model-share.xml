@@ -134,7 +134,7 @@
                 <show id="genai:accessibilityScore"/>
               </field-visibility>
               <appearance>
-                <set appearance="title" id="genai:accessibilityCheckable_cmm_set0" label-id="Checking"/>
+                <set appearance="title" id="genai:accessibilityCheckable_cmm_set0" label-id="Pre-Checking"/>
                 <field id="genai:accessibilityScore" set="genai:accessibilityCheckable_cmm_set0">
                 </field>
               </appearance>

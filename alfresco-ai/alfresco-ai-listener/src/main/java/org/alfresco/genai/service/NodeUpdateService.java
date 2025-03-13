@@ -4,6 +4,7 @@ import org.alfresco.core.handler.NodesApi;
 import org.alfresco.core.handler.TagsApi;
 import org.alfresco.core.model.NodeBodyUpdate;
 import org.alfresco.core.model.TagBody;
+import org.alfresco.genai.model.A11yScore;
 import org.alfresco.genai.model.Answer;
 import org.alfresco.genai.model.Summary;
 import org.alfresco.genai.model.Term;
@@ -170,6 +171,21 @@ public class NodeUpdateService {
                         .properties(Map.of(
                                 termProperty, term.getTerm(),
                                 termModelProperty, term.getModel())),
+                null, null);
+    }
+
+    /**
+     * Updates the node properties with scoring content and model information for the document identified by its UUID based
+     * on the provided {@link A11yScore} object.
+     *
+     * @param uuid  The unique identifier of the document node.
+     * @param score  The {@link A11yScore} object containing the scoring info.
+     */
+    public void updateNodeA11yScore(String uuid, A11yScore score) {
+        nodesApi.updateNode(uuid,
+                new NodeBodyUpdate()
+                        .properties(Map.of(
+                                "genai:accessibilityScore", score.getScore())),
                 null, null);
     }
 
