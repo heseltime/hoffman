@@ -74,7 +74,8 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
 
             LOG.info("A11y (Accessibility)-scoring document {}", uuid);
             // Make Score object from InputStream
-            A11yScore testScore = new A11yScore(documentContent);
+            A11yScore testScore = new A11yScore();
+            testScore.analyzeDocument(documentContent);
 
             nodeUpdateService.updateNodeA11yScore(uuid, testScore);
 

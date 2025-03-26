@@ -5,5 +5,7 @@ services:
             CONTENT_SERVICE_URL: "http://alfresco:8080"
             SPRING_ACTIVEMQ_BROKERURL: "tcp://activemq:61616"
             GENAI_URL: "http://genai:8506"
+            PDF_SERVICES_CLIENT_ID: ${PDF_SERVICES_CLIENT_ID}
+            PDF_SERVICES_CLIENT_SECRET: ${PDF_SERVICES_CLIENT_SECRET}
         depends_on:
             - alfresco
