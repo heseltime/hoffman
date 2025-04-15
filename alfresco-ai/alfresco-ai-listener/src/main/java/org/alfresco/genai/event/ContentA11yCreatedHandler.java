@@ -39,6 +39,9 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
     @Autowired
     NodeUpdateService nodeUpdateService;
 
+    @Autowired
+    private A11yScore testScore;
+
     /**
      * Handles the node creation event triggered by the system. Fetches document content
      * via REST API and initiates the accessibility scoring process.
@@ -65,7 +68,6 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
 
             LOG.info("A11y (Accessibility)-scoring document {}", uuid);
             // Make Score object from InputStream
-            A11yScore testScore = new A11yScore();
             testScore.analyzeDocument(documentContent);
 
             nodeUpdateService.updateNodeA11yScore(uuid, testScore);

@@ -48,6 +48,9 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
     @Autowired
     NodeUpdateService nodeUpdateService;
 
+    @Autowired
+    private A11yScore testScore;
+
     /**
      * Handles the node creation event triggered by the system. Checks for PDF renditions associated with documents
      * having the specified accessibility scoring aspect and initiates the document scoring process.
@@ -60,7 +63,6 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
         String uuid = nodeResource.getId();
 
         try {
-            // Fetch document content using Alfresco REST API
             ResponseEntity<org.springframework.core.io.Resource> response = nodesApi.getNodeContent(uuid, false, null, null);
             org.springframework.core.io.Resource resource = response.getBody();
 
@@ -69,12 +71,10 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
                 return;
             }
 
-            // Convert Resource to InputStream
             InputStream documentContent = resource.getInputStream();
 
             LOG.info("A11y (Accessibility)-scoring document {}", uuid);
-            // Make Score object from InputStream
-            A11yScore testScore = new A11yScore();
+            
             testScore.analyzeDocument(documentContent);
 
             nodeUpdateService.updateNodeA11yScore(uuid, testScore);

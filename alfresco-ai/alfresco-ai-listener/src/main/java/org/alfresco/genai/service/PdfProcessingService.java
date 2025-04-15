@@ -85,36 +85,23 @@ public class PdfProcessingService {
             String jsonReport = IOUtils.toString(reportStream, "UTF-8");
             JSONObject jsonObject = new JSONObject(jsonReport);
             
-            // Extract accessibility score: this approach might be good but probably won't work like this (get Unknown)
-            String extractedScore = jsonObject.optString("accessibilityScore", "Unknown");
+            LOG.info("Logging Adobe API Accessibility Report");
+            LOG.info(jsonReport);
+            
+            JSONObject summary = jsonObject.optJSONObject("Summary");
+            String extractedDescription = summary != null
+                    ? summary.optString("Description", "No description found")
+                    : "No summary section found";
 
-            // Save the report to a file for tracability
-            String outputFilePath = createOutputFilePath();
-            try (OutputStream outputStream = Files.newOutputStream(Paths.get(outputFilePath))) {
-                IOUtils.write(jsonReport, outputStream, "UTF-8");
-            }
 
-            LOG.info("Accessibility report saved at: {}", outputFilePath);
-            return extractedScore;
+            LOG.info("extractedDescription");
+            LOG.info(extractedDescription);
+
+            return extractedDescription;
 
         } catch (IOException e) {
             LOG.error("Error processing accessibility report", e);
             return "Error";
         }
-    }
-
-    /**
-     * Generates a unique output file path for the accessibility report.
-     * 
-     * @return The generated file path.
-     * @throws IOException If directory creation fails.
-     */
-    private String createOutputFilePath() throws IOException {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
-        LocalDateTime now = LocalDateTime.now();
-        String timeStamp = dateTimeFormatter.format(now);
-        
-        Files.createDirectories(Paths.get("output/PDFAccessibilityChecker"));
-        return "output/PDFAccessibilityChecker/accessibility" + timeStamp + ".json";
     }
 }

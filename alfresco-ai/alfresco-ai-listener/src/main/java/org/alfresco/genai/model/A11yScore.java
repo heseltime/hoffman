@@ -24,13 +24,13 @@ public class A11yScore {
     PdfProcessingService pdfProcessingService;
 
     /**
-     * Analyzes the document using Adobe PDF Accessibility Checker API.
+     * Analyzes the document using Adobe PDF Accessibility Checker API and sets score.
      *
      * @param inputStream The input stream of the document.
      */
-    public String analyzeDocument(InputStream inputStream) {
+    public void analyzeDocument(InputStream inputStream) {
         LOG.info("Starting accessibility analysis using Adobe API...");
-        return pdfProcessingService.checkPdfAccessibility(inputStream);
+        score = pdfProcessingService.checkPdfAccessibility(inputStream);
     }
 
     public String getScore() {

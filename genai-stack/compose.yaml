@@ -59,3 +59,4 @@ services:
       - 8506:8506
     volumes:
       - ./embedding_model:/embedding_model
+      - ./a11y-output:/tmp/output
