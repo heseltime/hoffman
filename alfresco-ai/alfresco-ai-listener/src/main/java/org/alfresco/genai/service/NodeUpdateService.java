@@ -97,6 +97,12 @@ public class NodeUpdateService {
     @Value("${content.service.description.model.property}")
     private String descriptionModelProperty;
 
+    @Value("${content.service.a11y.score.property}")
+    private String accessibilityScoreProperty;
+
+    @Value("${content.service.a11y.score.model.property}")
+    private String accessibilityModelScoreProperty;
+
     /**
      * Autowired instance of {@link NodesApi} for communication with the Alfresco Nodes API.
      */
@@ -185,8 +191,8 @@ public class NodeUpdateService {
         nodesApi.updateNode(uuid,
                 new NodeBodyUpdate()
                         .properties(Map.of(
-                                "genai:accessibilityScore", score.getScore(),
-                                "genai:accessibilityScoreModel", score.getModel())),
+                                accessibilityScoreProperty, score.getScore(),
+                                accessibilityModelScoreProperty, score.getModel())),
                 null, null);
     }
 
