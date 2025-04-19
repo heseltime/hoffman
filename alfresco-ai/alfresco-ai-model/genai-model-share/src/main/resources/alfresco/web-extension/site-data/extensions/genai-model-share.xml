@@ -132,10 +132,17 @@
             <form>
               <field-visibility>
                 <show id="genai:accessibilityScore"/>
+                <show id="genai:accessibilityScoreModel"/>
               </field-visibility>
               <appearance>
-                <set appearance="title" id="genai:accessibilityCheckable_cmm_set0" label-id="Pre-Checking"/>
+                <set appearance="title" id="genai:accessibilityCheckable_cmm_set0" label-id="Accessibility Pre-Checking"/>
                 <field id="genai:accessibilityScore" set="genai:accessibilityCheckable_cmm_set0">
+                  <control template="/org/alfresco/components/form/controls/textfield.ftl">
+                    </control>
+                </field>
+                <field id="genai:accessibilityScoreModel" read-only="true" set="genai:accessibilityCheckable_cmm_set0">
+                  <control template="/org/alfresco/components/form/controls/textfield.ftl">
+                  </control>
                 </field>
               </appearance>
             </form>

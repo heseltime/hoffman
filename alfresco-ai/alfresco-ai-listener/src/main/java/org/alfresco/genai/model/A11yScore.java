@@ -31,6 +31,7 @@ public class A11yScore {
     public void analyzeDocument(InputStream inputStream) {
         LOG.info("Starting accessibility analysis using Adobe API...");
         score = pdfProcessingService.checkPdfAccessibility(inputStream);
+        model = "Adobe PDF Services API";
     }
 
     public String getScore() {

@@ -185,7 +185,8 @@ public class NodeUpdateService {
         nodesApi.updateNode(uuid,
                 new NodeBodyUpdate()
                         .properties(Map.of(
-                                "genai:accessibilityScore", score.getScore())),
+                                "genai:accessibilityScore", score.getScore(),
+                                "genai:accessibilityScoreModel", score.getModel())),
                 null, null);
     }
 
