@@ -28,9 +28,9 @@ public class A11yScore {
      *
      * @param inputStream The input stream of the document.
      */
-    public void analyzeDocument(InputStream inputStream) {
+    public void analyzeDocument(String originalNodeId, InputStream inputStream) {
         LOG.info("Starting accessibility analysis using Adobe API...");
-        score = pdfProcessingService.checkPdfAccessibility(inputStream);
+        score = pdfProcessingService.checkPdfAccessibility(originalNodeId, inputStream);
         model = "Adobe PDF Services API";
     }
 
