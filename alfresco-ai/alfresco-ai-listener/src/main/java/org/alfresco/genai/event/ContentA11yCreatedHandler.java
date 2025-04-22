@@ -69,7 +69,7 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
             LOG.info("Node-Created-Handler: A11y (Accessibility)-scoring document {}", uuid);
             
             // Make Score object from InputStream
-            testScore.analyzeDocument(uuid, documentContent);
+            testScore.checkDocument(documentContent);
 
             nodeUpdateService.updateNodeA11yScore(uuid, testScore);
 

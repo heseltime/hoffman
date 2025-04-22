@@ -155,6 +155,165 @@
                         <facetable>false</facetable>
                     </index>
                 </property>
+                <!-- Summary fields -->
+                <property name="genai:accessibilitySummaryDescription">
+                    <title>Summary Description</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilitySummaryNeedsManualCheck">
+                    <title>Needs Manual Check</title>
+                    <type>d:int</type>
+                </property>
+                <property name="genai:accessibilitySummaryPassedManually">
+                    <title>Passed Manually</title>
+                    <type>d:int</type>
+                </property>
+                <property name="genai:accessibilitySummaryFailedManually">
+                    <title>Failed Manually</title>
+                    <type>d:int</type>
+                </property>
+                <property name="genai:accessibilitySummarySkipped">
+                    <title>Skipped</title>
+                    <type>d:int</type>
+                </property>
+                <property name="genai:accessibilitySummaryPassed">
+                    <title>Passed</title>
+                    <type>d:int</type>
+                </property>
+                <property name="genai:accessibilitySummaryFailed">
+                    <title>Failed</title>
+                    <type>d:int</type>
+                </property>
+
+                <!-- Flattened rule-based properties -->
+                <property name="genai:accessibilityReportRuleAccessibilityPermissionFlag">
+                    <title>Accessibility Permission Flag</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleImageOnlyPDF">
+                    <title>Image-only PDF</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTaggedPDF">
+                    <title>Tagged PDF</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleLogicalReadingOrder">
+                    <title>Logical Reading Order</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRulePrimaryLanguage">
+                    <title>Primary Language</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTitle">
+                    <title>Title</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleBookmarks">
+                    <title>Bookmarks</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleColorContrast">
+                    <title>Color Contrast</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTaggedContent">
+                    <title>Tagged Content</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTaggedAnnotations">
+                    <title>Tagged Annotations</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTabOrder">
+                    <title>Tab Order</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleCharacterEncoding">
+                    <title>Character Encoding</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTaggedMultimedia">
+                    <title>Tagged Multimedia</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleScreenFlicker">
+                    <title>Screen Flicker</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleScripts">
+                    <title>Scripts</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTimedResponses">
+                    <title>Timed Responses</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleNavigationLinks">
+                    <title>Navigation Links</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTaggedFormFields">
+                    <title>Tagged Form Fields</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleFieldDescriptions">
+                    <title>Field Descriptions</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleFiguresAlternateText">
+                    <title>Figures Alternate Text</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleNestedAlternateText">
+                    <title>Nested Alternate Text</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleAssociatedWithContent">
+                    <title>Associated with Content</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleHidesAnnotation">
+                    <title>Hides Annotation</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleOtherElementsAlternateText">
+                    <title>Other Elements Alternate Text</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleRows">
+                    <title>Table Rows</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleTHAndTD">
+                    <title>TH and TD</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleHeaders">
+                    <title>Table Headers</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleRegularity">
+                    <title>Table Regularity</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleSummary">
+                    <title>Table Summary</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleListItems">
+                    <title>List Items</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleLblAndLBody">
+                    <title>Lbl and LBody</title>
+                    <type>d:text</type>
+                </property>
+                <property name="genai:accessibilityReportRuleAppropriateNesting">
+                    <title>Appropriate Heading Nesting</title>
+                    <type>d:text</type>
+                </property>
             </properties>
         </aspect>
     </aspects>

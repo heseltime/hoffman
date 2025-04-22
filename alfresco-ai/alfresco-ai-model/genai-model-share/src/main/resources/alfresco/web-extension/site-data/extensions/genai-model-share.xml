@@ -133,17 +133,120 @@
               <field-visibility>
                 <show id="genai:accessibilityScore"/>
                 <show id="genai:accessibilityScoreModel"/>
+
+                <show id="genai:accessibilitySummaryDescription"/>
+                <show id="genai:accessibilitySummaryNeedsManualCheck"/>
+                <show id="genai:accessibilitySummaryPassedManually"/>
+                <show id="genai:accessibilitySummaryFailedManually"/>
+                <show id="genai:accessibilitySummarySkipped"/>
+                <show id="genai:accessibilitySummaryPassed"/>
+                <show id="genai:accessibilitySummaryFailed"/>
+                <show id="genai:accessibilityReportRuleAccessibilityPermissionFlag"/>
+                <show id="genai:accessibilityReportRuleImageOnlyPDF"/>
+                <show id="genai:accessibilityReportRuleTaggedPDF"/>
+                <show id="genai:accessibilityReportRuleLogicalReadingOrder"/>
+                <show id="genai:accessibilityReportRulePrimaryLanguage"/>
+                <show id="genai:accessibilityReportRuleTitle"/>
+                <show id="genai:accessibilityReportRuleBookmarks"/>
+                <show id="genai:accessibilityReportRuleColorContrast"/>
+                <show id="genai:accessibilityReportRuleTaggedContent"/>
+                <show id="genai:accessibilityReportRuleTaggedAnnotations"/>
+                <show id="genai:accessibilityReportRuleTabOrder"/>
+                <show id="genai:accessibilityReportRuleCharacterEncoding"/>
+                <show id="genai:accessibilityReportRuleTaggedMultimedia"/>
+                <show id="genai:accessibilityReportRuleScreenFlicker"/>
+                <show id="genai:accessibilityReportRuleScripts"/>
+                <show id="genai:accessibilityReportRuleTimedResponses"/>
+                <show id="genai:accessibilityReportRuleNavigationLinks"/>
+                <show id="genai:accessibilityReportRuleTaggedFormFields"/>
+                <show id="genai:accessibilityReportRuleFieldDescriptions"/>
+                <show id="genai:accessibilityReportRuleFiguresAlternateText"/>
+                <show id="genai:accessibilityReportRuleNestedAlternateText"/>
+                <show id="genai:accessibilityReportRuleAssociatedWithContent"/>
+                <show id="genai:accessibilityReportRuleHidesAnnotation"/>
+                <show id="genai:accessibilityReportRuleOtherElementsAlternateText"/>
+                <show id="genai:accessibilityReportRuleRows"/>
+                <show id="genai:accessibilityReportRuleTHAndTD"/>
+                <show id="genai:accessibilityReportRuleHeaders"/>
+                <show id="genai:accessibilityReportRuleRegularity"/>
+                <show id="genai:accessibilityReportRuleSummary"/>
+                <show id="genai:accessibilityReportRuleListItems"/>
+                <show id="genai:accessibilityReportRuleLblAndLBody"/>
+                <show id="genai:accessibilityReportRuleAppropriateNesting"/>
               </field-visibility>
+
               <appearance>
-                <set appearance="title" id="genai:accessibilityCheckable_cmm_set0" read-only="true" label-id="Accessibility Pre-Checking"/>
-                <field id="genai:accessibilityScore" set="genai:accessibilityCheckable_cmm_set0">
+                <field id="genai:accessibilityScore">
                   <control template="/org/alfresco/components/form/controls/textfield.ftl">
                     </control>
                 </field>
-                <field id="genai:accessibilityScoreModel" read-only="true" set="genai:accessibilityCheckable_cmm_set0">
+                <field id="genai:accessibilityScoreModel" read-only="true">
                   <control template="/org/alfresco/components/form/controls/textfield.ftl">
                   </control>
                 </field>
+
+                <!-- Summary Group -->
+                <set appearance="title" id="genai:accessibilityCheckable_summary" label-id="Accessibility Checking Summary"/>
+                <field id="genai:accessibilitySummaryDescription" set="genai:accessibilityCheckable_summary"/>
+                <field id="genai:accessibilitySummaryNeedsManualCheck" set="genai:accessibilityCheckable_summary"/>
+                <field id="genai:accessibilitySummaryPassedManually" set="genai:accessibilityCheckable_summary"/>
+                <field id="genai:accessibilitySummaryFailedManually" set="genai:accessibilityCheckable_summary"/>
+                <field id="genai:accessibilitySummarySkipped" set="genai:accessibilityCheckable_summary"/>
+                <field id="genai:accessibilitySummaryPassed" set="genai:accessibilityCheckable_summary"/>
+                <field id="genai:accessibilitySummaryFailed" set="genai:accessibilityCheckable_summary"/>
+
+                <!-- Document Rules -->
+                <set appearance="title" id="genai:accessibilityCheckable_doc" label-id="Accessibility Checking Document Rules"/>
+                <field id="genai:accessibilityReportRuleAccessibilityPermissionFlag" set="genai:accessibilityCheckable_doc"/>
+                <field id="genai:accessibilityReportRuleImageOnlyPDF" set="genai:accessibilityCheckable_doc"/>
+                <field id="genai:accessibilityReportRuleTaggedPDF" set="genai:accessibilityCheckable_doc"/>
+                <field id="genai:accessibilityReportRuleLogicalReadingOrder" set="genai:accessibilityCheckable_doc"/>
+                <field id="genai:accessibilityReportRulePrimaryLanguage" set="genai:accessibilityCheckable_doc"/>
+                <field id="genai:accessibilityReportRuleTitle" set="genai:accessibilityCheckable_doc"/>
+                <field id="genai:accessibilityReportRuleBookmarks" set="genai:accessibilityCheckable_doc"/>
+                <field id="genai:accessibilityReportRuleColorContrast" set="genai:accessibilityCheckable_doc"/>
+
+                <!-- Page Content -->
+                <set appearance="title" id="genai:accessibilityCheckable_page" label-id="Accessibility Checking Page Content"/>
+                <field id="genai:accessibilityReportRuleTaggedContent" set="genai:accessibilityCheckable_page"/>
+                <field id="genai:accessibilityReportRuleTaggedAnnotations" set="genai:accessibilityCheckable_page"/>
+                <field id="genai:accessibilityReportRuleTabOrder" set="genai:accessibilityCheckable_page"/>
+                <field id="genai:accessibilityReportRuleCharacterEncoding" set="genai:accessibilityCheckable_page"/>
+                <field id="genai:accessibilityReportRuleTaggedMultimedia" set="genai:accessibilityCheckable_page"/>
+                <field id="genai:accessibilityReportRuleScreenFlicker" set="genai:accessibilityCheckable_page"/>
+                <field id="genai:accessibilityReportRuleScripts" set="genai:accessibilityCheckable_page"/>
+                <field id="genai:accessibilityReportRuleTimedResponses" set="genai:accessibilityCheckable_page"/>
+                <field id="genai:accessibilityReportRuleNavigationLinks" set="genai:accessibilityCheckable_page"/>
+
+                <!-- Forms -->
+                <set appearance="title" id="genai:accessibilityCheckable_forms" label-id="Accessibility Checking Forms"/>
+                <field id="genai:accessibilityReportRuleTaggedFormFields" set="genai:accessibilityCheckable_forms"/>
+                <field id="genai:accessibilityReportRuleFieldDescriptions" set="genai:accessibilityCheckable_forms"/>
+
+                <!-- Alternate Text -->
+                <set appearance="title" id="genai:accessibilityCheckable_alttext" label-id="Accessibility Checking Alternate Text"/>
+                <field id="genai:accessibilityReportRuleFiguresAlternateText" set="genai:accessibilityCheckable_alttext"/>
+                <field id="genai:accessibilityReportRuleNestedAlternateText" set="genai:accessibilityCheckable_alttext"/>
+                <field id="genai:accessibilityReportRuleAssociatedWithContent" set="genai:accessibilityCheckable_alttext"/>
+                <field id="genai:accessibilityReportRuleHidesAnnotation" set="genai:accessibilityCheckable_alttext"/>
+                <field id="genai:accessibilityReportRuleOtherElementsAlternateText" set="genai:accessibilityCheckable_alttext"/>
+
+                <!-- Tables -->
+                <set appearance="title" id="genai:accessibilityCheckable_tables" label-id="Accessibility Checking Tables"/>
+                <field id="genai:accessibilityReportRuleRows" set="genai:accessibilityCheckable_tables"/>
+                <field id="genai:accessibilityReportRuleTHAndTD" set="genai:accessibilityCheckable_tables"/>
+                <field id="genai:accessibilityReportRuleHeaders" set="genai:accessibilityCheckable_tables"/>
+                <field id="genai:accessibilityReportRuleRegularity" set="genai:accessibilityCheckable_tables"/>
+                <field id="genai:accessibilityReportRuleSummary" set="genai:accessibilityCheckable_tables"/>
+
+                <!-- Lists -->
+                <set appearance="title" id="genai:accessibilityCheckable_lists" label-id="Accessibility Checking Lists"/>
+                <field id="genai:accessibilityReportRuleListItems" set="genai:accessibilityCheckable_lists"/>
+                <field id="genai:accessibilityReportRuleLblAndLBody" set="genai:accessibilityCheckable_lists"/>
+
+                <!-- Headings -->
+                <set appearance="title" id="genai:accessibilityCheckable_headings" label-id="Accessibility Checking Headings"/>
+                <field id="genai:accessibilityReportRuleAppropriateNesting" set="genai:accessibilityCheckable_headings"/>
               </appearance>
             </form>
           </forms>

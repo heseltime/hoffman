@@ -8,6 +8,8 @@ import org.alfresco.genai.model.A11yScore;
 import org.alfresco.genai.model.Answer;
 import org.alfresco.genai.model.Summary;
 import org.alfresco.genai.model.Term;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.alfresco.genai.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +27,8 @@ import java.util.Map;
  */
 @Service
 public class NodeUpdateService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(NodeStorageService.class);
 
     /**
      * Constant representing the property name for tags.
@@ -97,11 +101,131 @@ public class NodeUpdateService {
     @Value("${content.service.description.model.property}")
     private String descriptionModelProperty;
 
+    // --- Old A11y Summary Fields ---
     @Value("${content.service.a11y.score.property}")
     private String accessibilityScoreProperty;
 
     @Value("${content.service.a11y.score.model.property}")
     private String accessibilityModelScoreProperty;
+
+    // --- A11y Summary Fields ---
+    @Value("${content.service.a11y.summary.description.property}")
+    private String accessibilitySummaryDescriptionProperty;
+
+    @Value("${content.service.a11y.summary.needsManualCheck.property}")
+    private String accessibilitySummaryNeedsManualCheckProperty;
+
+    @Value("${content.service.a11y.summary.passedManually.property}")
+    private String accessibilitySummaryPassedManuallyProperty;
+
+    @Value("${content.service.a11y.summary.failedManually.property}")
+    private String accessibilitySummaryFailedManuallyProperty;
+
+    @Value("${content.service.a11y.summary.skipped.property}")
+    private String accessibilitySummarySkippedProperty;
+
+    @Value("${content.service.a11y.summary.passed.property}")
+    private String accessibilitySummaryPassedProperty;
+
+    @Value("${content.service.a11y.summary.failed.property}")
+    private String accessibilitySummaryFailedProperty;
+
+    // --- A11y Rule Results ---
+    @Value("${content.service.a11y.rule.accessibilityPermissionFlag.property}")
+    private String ruleAccessibilityPermissionFlagProperty;
+
+    @Value("${content.service.a11y.rule.imageOnlyPDF.property}")
+    private String ruleImageOnlyPDFProperty;
+
+    @Value("${content.service.a11y.rule.taggedPDF.property}")
+    private String ruleTaggedPDFProperty;
+
+    @Value("${content.service.a11y.rule.logicalReadingOrder.property}")
+    private String ruleLogicalReadingOrderProperty;
+
+    @Value("${content.service.a11y.rule.primaryLanguage.property}")
+    private String rulePrimaryLanguageProperty;
+
+    @Value("${content.service.a11y.rule.title.property}")
+    private String ruleTitleProperty;
+
+    @Value("${content.service.a11y.rule.bookmarks.property}")
+    private String ruleBookmarksProperty;
+
+    @Value("${content.service.a11y.rule.colorContrast.property}")
+    private String ruleColorContrastProperty;
+
+    @Value("${content.service.a11y.rule.taggedContent.property}")
+    private String ruleTaggedContentProperty;
+
+    @Value("${content.service.a11y.rule.taggedAnnotations.property}")
+    private String ruleTaggedAnnotationsProperty;
+
+    @Value("${content.service.a11y.rule.tabOrder.property}")
+    private String ruleTabOrderProperty;
+
+    @Value("${content.service.a11y.rule.characterEncoding.property}")
+    private String ruleCharacterEncodingProperty;
+
+    @Value("${content.service.a11y.rule.taggedMultimedia.property}")
+    private String ruleTaggedMultimediaProperty;
+
+    @Value("${content.service.a11y.rule.screenFlicker.property}")
+    private String ruleScreenFlickerProperty;
+
+    @Value("${content.service.a11y.rule.scripts.property}")
+    private String ruleScriptsProperty;
+
+    @Value("${content.service.a11y.rule.timedResponses.property}")
+    private String ruleTimedResponsesProperty;
+
+    @Value("${content.service.a11y.rule.navigationLinks.property}")
+    private String ruleNavigationLinksProperty;
+
+    @Value("${content.service.a11y.rule.taggedFormFields.property}")
+    private String ruleTaggedFormFieldsProperty;
+
+    @Value("${content.service.a11y.rule.fieldDescriptions.property}")
+    private String ruleFieldDescriptionsProperty;
+
+    @Value("${content.service.a11y.rule.figuresAlternateText.property}")
+    private String ruleFiguresAlternateTextProperty;
+
+    @Value("${content.service.a11y.rule.nestedAlternateText.property}")
+    private String ruleNestedAlternateTextProperty;
+
+    @Value("${content.service.a11y.rule.associatedWithContent.property}")
+    private String ruleAssociatedWithContentProperty;
+
+    @Value("${content.service.a11y.rule.hidesAnnotation.property}")
+    private String ruleHidesAnnotationProperty;
+
+    @Value("${content.service.a11y.rule.otherElementsAlternateText.property}")
+    private String ruleOtherElementsAlternateTextProperty;
+
+    @Value("${content.service.a11y.rule.rows.property}")
+    private String ruleRowsProperty;
+
+    @Value("${content.service.a11y.rule.thAndTd.property}")
+    private String ruleTHAndTDProperty;
+
+    @Value("${content.service.a11y.rule.headers.property}")
+    private String ruleHeadersProperty;
+
+    @Value("${content.service.a11y.rule.regularity.property}")
+    private String ruleRegularityProperty;
+
+    @Value("${content.service.a11y.rule.summary.property}")
+    private String ruleSummaryProperty;
+
+    @Value("${content.service.a11y.rule.listItems.property}")
+    private String ruleListItemsProperty;
+
+    @Value("${content.service.a11y.rule.lblAndLBody.property}")
+    private String ruleLblAndLBodyProperty;
+
+    @Value("${content.service.a11y.rule.appropriateNesting.property}")
+    private String ruleAppropriateNestingProperty;
 
     /**
      * Autowired instance of {@link NodesApi} for communication with the Alfresco Nodes API.
@@ -188,13 +312,87 @@ public class NodeUpdateService {
      * @param score  The {@link A11yScore} object containing the scoring info.
      */
     public void updateNodeA11yScore(String uuid, A11yScore score) {
-        nodesApi.updateNode(uuid,
-                new NodeBodyUpdate()
-                        .properties(Map.of(
-                                accessibilityScoreProperty, score.getScore(),
-                                accessibilityModelScoreProperty, score.getModel())),
-                null, null);
+        Map<String, Object> properties = new HashMap<>();
+    
+        LOG.info("📝 Updating node {} with accessibility score data", uuid);
+    
+        // Log full raw report for reference
+        LOG.debug("📄 Full A11yScore Report:\nSummary: {}\nRules: {}",
+                score.getSummaryDescription(),
+                score.getRuleResults());
+    
+        // Base score fields
+        logAndPut(properties, accessibilityScoreProperty, score.getScore());
+        logAndPut(properties, accessibilityModelScoreProperty, score.getModel());
+    
+        // Summary fields
+        logAndPut(properties, accessibilitySummaryDescriptionProperty, score.getSummaryDescription());
+        logAndPut(properties, accessibilitySummaryNeedsManualCheckProperty, score.getSummaryNeedsManualCheck());
+        logAndPut(properties, accessibilitySummaryPassedManuallyProperty, score.getSummaryPassedManually());
+        logAndPut(properties, accessibilitySummaryFailedManuallyProperty, score.getSummaryFailedManually());
+        logAndPut(properties, accessibilitySummarySkippedProperty, score.getSummarySkipped());
+        logAndPut(properties, accessibilitySummaryPassedProperty, score.getSummaryPassed());
+        logAndPut(properties, accessibilitySummaryFailedProperty, score.getSummaryFailed());
+    
+        // Rule fields
+        Map<String, String> rules = score.getRuleResults();
+        putRule(properties, ruleAccessibilityPermissionFlagProperty, rules, "AccessibilityPermissionFlag");
+        putRule(properties, ruleImageOnlyPDFProperty, rules, "ImageOnlyPDF");
+        putRule(properties, ruleTaggedPDFProperty, rules, "TaggedPDF");
+        putRule(properties, ruleLogicalReadingOrderProperty, rules, "LogicalReadingOrder");
+        putRule(properties, rulePrimaryLanguageProperty, rules, "PrimaryLanguage");
+        putRule(properties, ruleTitleProperty, rules, "Title");
+        putRule(properties, ruleBookmarksProperty, rules, "Bookmarks");
+        putRule(properties, ruleColorContrastProperty, rules, "ColorContrast");
+        putRule(properties, ruleTaggedContentProperty, rules, "TaggedContent");
+        putRule(properties, ruleTaggedAnnotationsProperty, rules, "TaggedAnnotations");
+        putRule(properties, ruleTabOrderProperty, rules, "TabOrder");
+        putRule(properties, ruleCharacterEncodingProperty, rules, "CharacterEncoding");
+        putRule(properties, ruleTaggedMultimediaProperty, rules, "TaggedMultimedia");
+        putRule(properties, ruleScreenFlickerProperty, rules, "ScreenFlicker");
+        putRule(properties, ruleScriptsProperty, rules, "Scripts");
+        putRule(properties, ruleTimedResponsesProperty, rules, "TimedResponses");
+        putRule(properties, ruleNavigationLinksProperty, rules, "NavigationLinks");
+        putRule(properties, ruleTaggedFormFieldsProperty, rules, "TaggedFormFields");
+        putRule(properties, ruleFieldDescriptionsProperty, rules, "FieldDescriptions");
+        putRule(properties, ruleFiguresAlternateTextProperty, rules, "FiguresAlternateText");
+        putRule(properties, ruleNestedAlternateTextProperty, rules, "NestedAlternateText");
+        putRule(properties, ruleAssociatedWithContentProperty, rules, "AssociatedWithContent");
+        putRule(properties, ruleHidesAnnotationProperty, rules, "HidesAnnotation");
+        putRule(properties, ruleOtherElementsAlternateTextProperty, rules, "OtherElementsAlternateText");
+        putRule(properties, ruleRowsProperty, rules, "Rows");
+        putRule(properties, ruleTHAndTDProperty, rules, "THAndTD");
+        putRule(properties, ruleHeadersProperty, rules, "Headers");
+        putRule(properties, ruleRegularityProperty, rules, "Regularity");
+        putRule(properties, ruleSummaryProperty, rules, "Summary");
+        putRule(properties, ruleListItemsProperty, rules, "ListItems");
+        putRule(properties, ruleLblAndLBodyProperty, rules, "LblAndLBody");
+        putRule(properties, ruleAppropriateNestingProperty, rules, "AppropriateNesting");
+    
+        // Log final property map
+        LOG.debug("📦 Final properties to update on node {}: {}", uuid, properties);
+    
+        // Update Alfresco node
+        nodesApi.updateNode(uuid, new NodeBodyUpdate().properties(properties), null, null);
     }
+    
+    // Helper to log and put a property
+    private void logAndPut(Map<String, Object> map, String key, Object value) {
+        LOG.debug("✅ Setting property {} = {}", key, value);
+        map.put(key, value);
+    }
+    
+    // Helper to handle rules from map
+    private void putRule(Map<String, Object> map, String propertyKey, Map<String, String> rules, String ruleKey) {
+        String value = rules.get(ruleKey);
+        if (value != null) {
+            logAndPut(map, propertyKey, value);
+        } else {
+            LOG.warn("⚠️ Rule '{}' not found in A11yScore.getRuleResults()", ruleKey);
+        }
+    }
+    
+    
 
     /**
      * Gets the list of terms stored in the primary parent of the document uuid

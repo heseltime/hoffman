@@ -32,6 +32,32 @@ public class PdfProcessingService {
         this.nodeStorageService = nodeStorageService;
     }
 
+    public JSONObject getAccessibilityReportObject(InputStream inputStream) {
+        try {
+            // Upload and submit PDF to Adobe API
+            Asset asset = pdfServices.upload(inputStream, PDFServicesMediaType.PDF.getMediaType());
+            PDFAccessibilityCheckerJob job = new PDFAccessibilityCheckerJob(asset);
+            String location = pdfServices.submit(job);
+            PDFServicesResponse<PDFAccessibilityCheckerResult> response = pdfServices.getJobResult(location, PDFAccessibilityCheckerResult.class);
+            StreamAsset reportStreamAsset = pdfServices.getContent(response.getResult().getReport());
+
+            // Convert to JSON
+            String jsonReport = IOUtils.toString(reportStreamAsset.getInputStream(), StandardCharsets.UTF_8);
+
+            JSONObject jsonObject = new JSONObject(jsonReport);
+            
+            //String description = jsonObject.optJSONObject("Summary").optString("Description", "No summary");
+
+            LOG.info("✅ A11y returned");
+
+            return jsonObject;
+
+        } catch (Exception e) {
+            LOG.error("❌ Error running accessibility check or saving report", e);
+            return null;
+        }
+    }
+
     public String checkPdfAccessibility(String originalNodeId, InputStream inputStream) {
         try {
             // Upload and submit PDF to Adobe API
