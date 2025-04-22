@@ -73,13 +73,13 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
 
             InputStream documentContent = resource.getInputStream();
 
-            LOG.info("A11y (Accessibility)-scoring document {}", uuid);
+            LOG.info("Node-Updated-Handler: A11y (Accessibility)-scoring document {}", uuid);
             
-            testScore.analyzeDocument(uuid, documentContent);
+            //testScore.analyzeDocument(uuid, documentContent);
 
-            nodeUpdateService.updateNodeA11yScore(uuid, testScore);
+            //nodeUpdateService.updateNodeA11yScore(uuid, testScore);
 
-            LOG.info("Document {} has been created with a11y-score and model", uuid);
+            LOG.info("Document {} has NOT been created with a11y-score and model", uuid);
         } catch (Exception e) {
             LOG.error("Failed to fetch content for document {}: {}", uuid, e.getMessage());
         }

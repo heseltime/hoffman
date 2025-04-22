@@ -53,9 +53,13 @@ public class PdfProcessingService {
             String originalName = nodeStorageService.getNodeTitle(originalNodeId)
                 .orElse("document") + ".a11y-report.json";
 
-            nodeStorageService.createOrUpdateJsonNode(reportFolderId, originalName, jsonReport);
+            String reportNodeId = nodeStorageService.createOrUpdateJsonNode(reportFolderId, originalName, jsonReport);
 
             LOG.info("✅ A11y report saved to folder {} with name {}", reportFolderId, originalName);
+
+            // Not working yet
+            //nodeStorageService.linkDocumentToFolderAsReference(originalNodeId, reportFolderId); // reportFolder in "My Files"
+
             return description;
 
         } catch (Exception e) {

@@ -139,4 +139,18 @@ public class NodeStorageService {
             return Optional.empty();
         }
     }
+
+    // Not working yet: bidrectional links would be nice, both for user and programmatically
+    public void linkDocumentToFolderAsReference(String documentNodeId, String folderNodeId) {
+        try {
+            ChildAssociationBody assocBody = new ChildAssociationBody()
+                .childId(documentNodeId)
+                .assocType("genai:hasReportFolder");
+
+            nodesApi.createSecondaryChildAssociation(folderNodeId, assocBody, null);
+        } catch (Exception e) {
+            LOG.warn("Failed to link nodes {} → {} as attachment", folderNodeId, documentNodeId, e);
+        }
+    }
+    
 }
