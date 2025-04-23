@@ -40,12 +40,42 @@ public class A11yScore {
     @Autowired
     PdfProcessingService pdfProcessingService;
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("🧾 A11yScore/Report\n");
+        sb.append("──────────────────────────────\n");
+        sb.append("Score: ").append(score).append("\n");
+        sb.append("Model: ").append(model).append("\n\n");
+
+        sb.append("📄 Summary:\n");
+        sb.append("Description: ").append(summaryDescription).append("\n");
+        sb.append("Needs manual check: ").append(summaryNeedsManualCheck).append("\n");
+        sb.append("Passed manually: ").append(summaryPassedManually).append("\n");
+        sb.append("Failed manually: ").append(summaryFailedManually).append("\n");
+        sb.append("Skipped: ").append(summarySkipped).append("\n");
+        sb.append("Passed: ").append(summaryPassed).append("\n");
+        sb.append("Failed: ").append(summaryFailed).append("\n\n");
+
+        sb.append("📋 Rules:\n");
+        if (ruleResults.isEmpty()) {
+            sb.append("(no rules found)\n");
+        } else {
+            ruleResults.forEach((key, value) ->
+                    sb.append(String.format("• %-30s : %s%n", key, value)));
+        }
+
+        return sb.toString();
+    }
+
+    // Old version
     public void analyzeDocument(String originalNodeId, InputStream inputStream) {
         LOG.info("Starting accessibility analysis using Adobe API...");
         score = pdfProcessingService.checkPdfAccessibility(originalNodeId, inputStream);
         model = "Adobe PDF Services API";
     }
 
+    // New Version
     public void checkDocument(InputStream inputStream) {
         LOG.info("Starting accessibility checking using Adobe API and constructing A11yScore");
 
@@ -149,4 +179,49 @@ public class A11yScore {
     public String getRuleStatus(String ruleKey) {
         return ruleResults.get(ruleKey);
     }
+
+    // All the setters
+    public void setScore(String score) {
+        this.score = score;
+    }
+    
+    public void setModel(String model) {
+        this.model = model;
+    }
+    
+    public void setSummaryDescription(String summaryDescription) {
+        this.summaryDescription = summaryDescription;
+    }
+    
+    public void setSummaryNeedsManualCheck(int summaryNeedsManualCheck) {
+        this.summaryNeedsManualCheck = summaryNeedsManualCheck;
+    }
+    
+    public void setSummaryPassedManually(int summaryPassedManually) {
+        this.summaryPassedManually = summaryPassedManually;
+    }
+    
+    public void setSummaryFailedManually(int summaryFailedManually) {
+        this.summaryFailedManually = summaryFailedManually;
+    }
+    
+    public void setSummarySkipped(int summarySkipped) {
+        this.summarySkipped = summarySkipped;
+    }
+    
+    public void setSummaryPassed(int summaryPassed) {
+        this.summaryPassed = summaryPassed;
+    }
+    
+    public void setSummaryFailed(int summaryFailed) {
+        this.summaryFailed = summaryFailed;
+    }
+    
+    public void setRuleResults(Map<String, String> ruleResults) {
+        this.ruleResults.clear();
+        if (ruleResults != null) {
+            this.ruleResults.putAll(ruleResults);
+        }
+    }
+    
 }

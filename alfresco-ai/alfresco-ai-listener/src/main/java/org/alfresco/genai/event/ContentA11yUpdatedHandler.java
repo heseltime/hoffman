@@ -16,6 +16,7 @@ import org.alfresco.event.sdk.model.v1.model.NodeResource;
 import org.alfresco.event.sdk.model.v1.model.RepoEvent;
 import org.alfresco.event.sdk.model.v1.model.Resource;
 import org.alfresco.genai.model.A11yScore;
+import org.alfresco.genai.service.NodeStorageService;
 import org.alfresco.genai.service.NodeUpdateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,9 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
     NodeUpdateService nodeUpdateService;
 
     @Autowired
+    NodeStorageService nodeStorageService;
+
+    @Autowired
     private A11yScore testScore;
 
     /**
@@ -71,15 +75,11 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
                 return;
             }
 
-            InputStream documentContent = resource.getInputStream();
+            A11yScore score = nodeStorageService.createA11yScoreFromNode(uuid);
 
-            LOG.info("Node-Updated-Handler: A11y (Accessibility)-scoring document {}", uuid);
-            
-            //testScore.analyzeDocument(uuid, documentContent);
+            LOG.info("Score for document found in ContentA11yUpdatedHandler {}", uuid);
+            LOG.info(score.toString());
 
-            //nodeUpdateService.updateNodeA11yScore(uuid, testScore);
-
-            LOG.info("Document {} has NOT been created with a11y-score and model", uuid);
         } catch (Exception e) {
             LOG.error("Failed to fetch content for document {}: {}", uuid, e.getMessage());
         }
