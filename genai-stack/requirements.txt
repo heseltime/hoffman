@@ -4,7 +4,7 @@ wikipedia
 tiktoken
 neo4j
 streamlit
-sentence_transformers==2.2.2
+sentence_transformers
 Pillow
 fastapi
 PyPDF2
@@ -14,6 +14,7 @@ sse-starlette
 boto3
 python-multipart
 pycurl
+pymupdf
 
 annotated-types==0.7.0
 attrs==24.3.0

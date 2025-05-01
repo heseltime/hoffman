@@ -68,6 +68,35 @@ public class A11yScore {
         return sb.toString();
     }
 
+    public JSONObject toJsonObject() {
+        JSONObject json = new JSONObject();
+    
+        json.put("score", score);
+        json.put("model", model);
+    
+        JSONObject summary = new JSONObject();
+        summary.put("description", summaryDescription);
+        summary.put("needsManualCheck", summaryNeedsManualCheck);
+        summary.put("passedManually", summaryPassedManually);
+        summary.put("failedManually", summaryFailedManually);
+        summary.put("skipped", summarySkipped);
+        summary.put("passed", summaryPassed);
+        summary.put("failed", summaryFailed);
+        json.put("summary", summary);
+    
+        JSONObject rules = new JSONObject();
+        for (Map.Entry<String, String> entry : ruleResults.entrySet()) {
+            rules.put(entry.getKey(), entry.getValue());
+        }
+        json.put("rules", rules);
+    
+        return json;
+    }
+    
+    public String toJsonString() {
+        return toJsonObject().toString(2); // pretty print with indent of 2
+    }    
+
     // Old version
     public void analyzeDocument(String originalNodeId, InputStream inputStream) {
         LOG.info("Starting accessibility analysis using Adobe API...");

@@ -16,8 +16,11 @@ from chains import (
     load_embedding_model,
     load_llm,
 )
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+
+import tempfile
 
 from docling.document_converter import DocumentConverter
 
@@ -199,3 +202,42 @@ async def jsonify(file: UploadFile):
 
     except Exception as e:
         return {"error": str(e), "status": "failure"}
+    
+
+@app.post("/accessible-document-version")
+async def new_version(
+    file: UploadFile = File(...),
+    metadata: str = Form(...)
+):
+    """
+    Accepts a PDF file and a JSON metadata report (e.g. accessibility score).
+    """
+    try:
+        # Load the JSON metadata
+        a11y_data = json.loads(metadata)
+
+        # Save the file temporarily
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
+            temp_pdf.write(await file.read())
+            temp_path = temp_pdf.name
+
+        print("📊 Received A11y metadata:", json.dumps(a11y_data, indent=2))
+        print("📄 File saved at:", temp_path)
+
+        # Now:
+        # - pass file path and metadata to your downstream model
+        # - possibly store the results in a database or trigger additional workflows
+
+        # Clean up temp file
+        os.remove(temp_path)
+
+        return JSONResponse(
+            status_code=200,
+            content={"message": "Document and A11y metadata received", "model": llm_name}
+        )
+
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={"error": str(e), "status": "failure"}
+        )

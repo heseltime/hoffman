@@ -13,6 +13,7 @@ import org.alfresco.event.sdk.model.v1.model.NodeResource;
 import org.alfresco.event.sdk.model.v1.model.RepoEvent;
 import org.alfresco.event.sdk.model.v1.model.Resource;
 import org.alfresco.genai.model.A11yScore;
+import org.alfresco.genai.service.GenAiClient;
 import org.alfresco.genai.service.NodeUpdateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,10 +38,13 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
     private NodesApi nodesApi;
 
     @Autowired
-    NodeUpdateService nodeUpdateService;
+    private NodeUpdateService nodeUpdateService;
 
     @Autowired
     private A11yScore testScore;
+
+    @Autowired
+    private GenAiClient genAiClient;
 
     /**
      * Handles the node creation event triggered by the system. Fetches document content
@@ -72,6 +76,14 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
             testScore.checkDocument(documentContent);
 
             nodeUpdateService.updateNodeA11yScore(uuid, testScore);
+
+            // TODO: Transmit documentContent and testScore to GenAI Stack
+            //  - at this (controller) point this could be
+            //      * the testScore as full report object
+            //      * or individual (failing) tests, which are then promptified on Python level ...
+            //          ... reserving text-level manipulation for the Python Stack definitely
+            //      ... both these options and sub options should be UI-triggerable <--- (Other TODO)
+            genAiClient.getAccessibleDocumentVersion(documentContent, testScore);
 
             LOG.info("Document {} has been created with a11y-score and model", uuid);
         } catch (Exception e) {

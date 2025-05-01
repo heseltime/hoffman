@@ -1,21 +1,35 @@
 package org.alfresco.genai.service;
 
-import jakarta.annotation.PostConstruct;
-import okhttp3.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import org.alfresco.genai.model.A11yScore;
 import org.alfresco.genai.model.Answer;
 import org.alfresco.genai.model.Description;
 import org.alfresco.genai.model.Summary;
 import org.alfresco.genai.model.Term;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import jakarta.annotation.PostConstruct;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * The {@code GenAiClient} class is a Spring service that interacts with the GenAI service to obtain document summaries
@@ -24,6 +38,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class GenAiClient {
+
+    private static final Logger LOG = LoggerFactory.getLogger(NodeStorageService.class);
 
     /**
      * The base URL of the GenAI service obtained from configuration.
@@ -193,5 +209,41 @@ public class GenAiClient {
                 .model(aiResponse.get("model").toString());
 
     }
+
+    public void getAccessibleDocumentVersion(InputStream documentContent, A11yScore testScore) throws IOException {
+        // Convert InputStream to temporary File (OkHttp needs a concrete file or byte array )
+        File tempFile = File.createTempFile("doc-upload-", UUID.randomUUID().toString() + ".pdf");
+        Files.copy(documentContent, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+        try {
+			// Build JSON payload with score (as string or map)
+			MediaType mediaType = MediaType.parse("application/json");
+			String scoreJson = testScore.toJsonString(); // now full report in JSON, FROM the object (not using specific checker's report directly)
+
+			RequestBody requestBody = new MultipartBody.Builder()
+				.setType(MultipartBody.FORM)
+				.addFormDataPart("file", tempFile.getName(), RequestBody.create(tempFile, MediaType.parse("application/pdf")))
+				.addFormDataPart("metadata", null, RequestBody.create(scoreJson, mediaType))
+				.build();
+
+			Request request = new Request.Builder()
+				.url(genaiUrl + "/accessible-document-version") // <- Adjust the endpoint as needed
+				.post(requestBody)
+				.build();
+
+			Response response = client.newCall(request).execute();
+			if (!response.isSuccessful()) {
+				throw new IOException("Unexpected response from GenAI: " + response);
+			}
+
+            LOG.info("Successfully sent document and score to GenAI service");
+
+        } finally {
+			// Clean up temp file
+			if (tempFile.exists()) {
+			tempFile.delete();
+			}
+        }
+	}
 
 }
