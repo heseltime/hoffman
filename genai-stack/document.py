@@ -202,42 +202,95 @@ async def jsonify(file: UploadFile):
 
     except Exception as e:
         return {"error": str(e), "status": "failure"}
-    
+
+import shutil
 
 @app.post("/accessible-document-version")
 async def new_version(
     file: UploadFile = File(...),
     metadata: str = Form(...)
 ):
-    """
-    Accepts a PDF file and a JSON metadata report (e.g. accessibility score).
-    """
     try:
-        # Load the JSON metadata
         a11y_data = json.loads(metadata)
 
-        # Save the file temporarily
+        print("📊 Copying uploaded file to disk")
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
-            temp_pdf.write(await file.read())
+            shutil.copyfileobj(file.file, temp_pdf)
             temp_path = temp_pdf.name
 
         print("📊 Received A11y metadata:", json.dumps(a11y_data, indent=2))
         print("📄 File saved at:", temp_path)
 
-        # Now:
-        # - pass file path and metadata to your downstream model
-        # - possibly store the results in a database or trigger additional workflows
+        pages_object_code = extract_page_object_code(temp_path)
 
-        # Clean up temp file
+        improved_pages = []
+        for i, page_code in enumerate(pages_object_code):
+            improved_code = get_improved_page_code(page_code, a11y_data, i + 1)
+            improved_pages.append(improved_code)
+
+        # Save LLM output for inspection
+        for i, code in enumerate(improved_pages):
+            try:
+                filename = f"page_{i+1}_improved.json"
+                with open(filename, "w", encoding="utf-8") as f:
+                    f.write(code)
+                logger.info(f"✅ Saved improved object code for page {i+1} → {filename}")
+            except Exception as e:
+                logger.error(f"❌ Failed to write page {i+1}: {e}")
+
         os.remove(temp_path)
 
         return JSONResponse(
             status_code=200,
-            content={"message": "Document and A11y metadata received", "model": llm_name}
+            content={"message": "Improved object code generated", "pages": len(improved_pages), "model": llm_name}
         )
 
     except Exception as e:
+        logger.error(f"❌ Exception in /accessible-document-version: {e}", exc_info=True)
         return JSONResponse(
             status_code=500,
             content={"error": str(e), "status": "failure"}
         )
+
+
+import fitz  # PyMuPDF
+
+def extract_page_object_code(pdf_path: str) -> list[str]:
+    """
+    Returns a list of object-code strings, one per page.
+    """
+    doc = fitz.open(pdf_path)
+    pages_object_code = []
+
+    for i, page in enumerate(doc):
+        rawdict = page.get_text("rawdict")
+        pages_object_code.append(json.dumps(rawdict, indent=2))  # Optional: more LLM-friendly
+    return pages_object_code
+
+# Use LangChain wrapper as in your existing classify/summary endpoints
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+
+def get_improved_page_code(original_code: str, metadata: dict, page_number: int) -> str:
+    prompt_template = PromptTemplate.from_template("""
+        You are an AI assistant specializing in PDF accessibility remediation.
+
+        Here is the accessibility metadata for page {page_number}:
+        {metadata}
+
+        Here is the original PDF object code of page {page_number}:
+        {object_code}
+
+        Improve the structure and add accessibility features such as tags, /Alt attributes for images, and logical reading order.
+        Return only the corrected page object code in valid JSON format.
+        """)
+
+    chain = LLMChain(llm=llm, prompt=prompt_template)
+
+    response = chain.run({
+        "page_number": page_number,
+        "metadata": json.dumps(metadata, indent=2),
+        "object_code": original_code
+    })
+
+    return response.strip()
