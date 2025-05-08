@@ -1,22 +1,3 @@
-openai
-python-dotenv
-wikipedia
-tiktoken
-neo4j
-streamlit
-sentence_transformers
-Pillow
-fastapi
-PyPDF2
-pydantic
-uvicorn
-sse-starlette
-boto3
-python-multipart
-pycurl
-pymupdf
-unstructured
-
 annotated-types==0.7.0
 attrs==24.3.0
 autoflake==2.3.1
@@ -54,7 +35,7 @@ mpmath==1.3.0
 multiprocess==0.70.17
 networkx==3.2.1
 ninja==1.11.1.3
-numpy==2.0.2
+numpy==1.24.4
 opencv-python-headless==4.10.0.84
 openpyxl==3.1.5
 packaging==24.2
@@ -66,6 +47,7 @@ pydantic-settings==2.7.0
 pydantic_core==2.27.1
 pyflakes==3.2.0
 Pygments==2.18.0
+pymupdf
 pypdfium2==4.30.0
 python-bidi==0.6.3
 python-dateutil==2.9.0.post0
@@ -102,3 +84,7 @@ typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==2.2.3
 XlsxWriter==3.2.0
+
+unstructured==0.10.25
+pdfminer.six==20221105
+langchain==0.0.334

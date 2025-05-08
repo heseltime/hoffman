@@ -5,12 +5,19 @@ import json
 from io import BytesIO
 from urllib.parse import urlencode
 
+import traceback
+import requests
+
 import streamlit as st
 from langchain.chains import RetrievalQA
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.vectorstores.neo4j_vector import Neo4jVector
+
+#from langchain.document_loaders import UnstructuredPDFLoader
+import fitz  # PyMuPDF test with structural object code
+
 from streamlit.logger import get_logger
 from chains import (
     load_embedding_model,
@@ -202,41 +209,68 @@ async def jsonify(file: UploadFile):
 
     except Exception as e:
         return {"error": str(e), "status": "failure"}
-    
+
 
 @app.post("/accessible-document-version")
 async def new_version(
     file: UploadFile = File(...),
     metadata: str = Form(...)
 ):
-    """
-    Accepts a PDF file and a JSON metadata report (e.g. accessibility score).
-    """
     try:
-        # Load the JSON metadata
+        if file.content_type != "application/pdf":
+            raise ValueError(f"Invalid content type: {file.content_type}")
+
         a11y_data = json.loads(metadata)
-
-        # Save the file temporarily
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
-            temp_pdf.write(await file.read())
-            temp_path = temp_pdf.name
-
         print("📊 Received A11y metadata:", json.dumps(a11y_data, indent=2))
-        print("📄 File saved at:", temp_path)
 
-        # Now:
-        # - pass file path and metadata to your downstream model
-        # - possibly store the results in a database or trigger additional workflows
+        file_bytes = await file.read()
+        print(f"📎 ... for file(name): {file.filename}")
+        print(f"📦 ... with size: {len(file_bytes)} bytes")
 
-        # Clean up temp file
-        os.remove(temp_path)
+        if not file_bytes:
+            raise ValueError("Uploaded file is empty")
+
+        doc = fitz.open(stream=file_bytes, filetype="pdf")
+        extracted_text = "\n".join([page.get_text() for page in doc])
+        doc.close()
+
+        print("📄 Extracted text length:", len(extracted_text))
+
+        prompt = (
+            "You are an assistant that improves document accessibility.\n\n"
+            "Accessibility metadata:\n"
+            f"{json.dumps(a11y_data, indent=2)}\n\n"
+            "Document content:\n"
+            f"{extracted_text[:5000]}...\n\n"
+            "Based on the content and metadata, suggest how to improve accessibility."
+        )
+
+        print("🧠 Prompt sent to LLM:\n", prompt)
+
+        response = requests.post(
+            f"{ollama_base_url}/api/generate",
+            json={
+                "model": llm_name,
+                "prompt": prompt,
+                "stream": False
+            }
+        )
+
+        print("🌐 LLM HTTP response status:", response.status_code)
+        print("🌐 LLM response body:", response.text)
+
+        response.raise_for_status()
+        response_data = response.json()
+        answer = response_data.get("response", "[No response from LLM]")
 
         return JSONResponse(
             status_code=200,
-            content={"message": "Document and A11y metadata received", "model": llm_name}
+            content={"message": "LLM responded successfully", "response": answer, "model": llm_name}
         )
 
     except Exception as e:
+        import logging
+        logging.exception("Exception in /accessible-document-version")
         return JSONResponse(
             status_code=500,
             content={"error": str(e), "status": "failure"}

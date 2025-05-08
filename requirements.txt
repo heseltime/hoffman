@@ -1,0 +1,18 @@
+langchain-core==0.3.59
+langchain-community==0.3.23
+langsmith==0.1.136
+unstructured[all-docs]==0.12.2
+pdfminer.six==20231228
+numpy==1.26.4
+uvicorn
+fastapi
+python-multipart
+pdf2image  # Required by unstructured for PDF loading in 'elements' mode
+olefile==0.46
+
+# System dependency for pdf2image:
+# - macOS: brew install poppler
+# - Ubuntu: sudo apt-get install poppler-utils
+# - Windows: Add poppler/bin to PATH (https://github.com/oschwartz10612/poppler-windows/releases)
+
+# Added on top of existing .venv from Unstructured package testing

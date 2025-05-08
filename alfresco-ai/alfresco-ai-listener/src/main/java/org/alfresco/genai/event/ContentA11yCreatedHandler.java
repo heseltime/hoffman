@@ -69,11 +69,12 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
 
             // Convert Resource to InputStream
             InputStream documentContent = resource.getInputStream();
+            byte[] contentBytes = documentContent.readAllBytes();
 
             LOG.info("Node-Created-Handler: A11y (Accessibility)-scoring document {}", uuid);
             
             // Make Score object from InputStream
-            testScore.checkDocument(documentContent);
+            testScore.checkDocument(new ByteArrayInputStream(contentBytes));
 
             nodeUpdateService.updateNodeA11yScore(uuid, testScore);
 
@@ -83,7 +84,7 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
             //      * or individual (failing) tests, which are then promptified on Python level ...
             //          ... reserving text-level manipulation for the Python Stack definitely
             //      ... both these options and sub options should be UI-triggerable <--- (Other TODO)
-            genAiClient.getAccessibleDocumentVersion(documentContent, testScore);
+            genAiClient.getAccessibleDocumentVersion(new ByteArrayInputStream(contentBytes), testScore);
 
             LOG.info("Document {} has been created with a11y-score and model", uuid);
         } catch (Exception e) {

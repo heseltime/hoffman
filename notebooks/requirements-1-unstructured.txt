@@ -1,0 +1,11 @@
+langchain-core==0.3.59
+langchain-community==0.3.23
+langsmith==0.1.136
+unstructured[all-docs]==0.12.2
+pdfminer.six==20221105
+numpy==1.26.4
+uvicorn
+fastapi
+python-multipart
+pdf2image
+olefile==0.46
