@@ -43,6 +43,9 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
     @Value("${content.service.a11y.aspect}")
     private String a11yAspect;
 
+    @Value("${accessibility.pipeline.max.checking.retries}")
+    private String MAX_RETRIES_ACCESSIBILITY_CHECKING_LOOP;
+
     @Autowired
     private NodesApi nodesApi;
 

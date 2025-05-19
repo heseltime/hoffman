@@ -51,7 +51,7 @@ summary_size = os.getenv("SUMMARY_SIZE")
 tags_number = os.getenv("TAGS_NUMBER")
 
 # A11y
-max_retries_default = os.getenv("MAX_RETRIES_LLM_LOOP_DEFAULT")
+MAX_RETRIES_LLM_LOOP_DEFAULT = os.getenv("MAX_RETRIES_LLM_LOOP_DEFAULT")
 
 logger = get_logger(__name__)
 
@@ -240,7 +240,7 @@ async def accessible_document_version_raw_pdf(
         logger.info("📊 Parsed A11y metadata:\n%s", json.dumps(a11y_data, indent=2))
 
         max_retries = max_retries_param or a11y_data.get("maxRetries", 2)
-        logger.info("📊 Obtained max LLM-retries: %d (max retries - by - default: %d)", max_retries, max_retries_default)
+        logger.info("📊 Obtained max LLM-retries: %d (max retries - by - default: %d)", max_retries, MAX_RETRIES_LLM_LOOP_DEFAULT)
 
         doc = fitz.open(stream=file_bytes, filetype="pdf")
         extracted_text = "\n".join([page.get_text() for page in doc])
