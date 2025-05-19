@@ -2,6 +2,7 @@ package org.alfresco.genai.event;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.File;
 
 import org.alfresco.core.handler.NodesApi;
 import org.alfresco.event.sdk.handling.filter.EventFilter;
@@ -21,6 +22,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Base64;
 
 /**
  * The {@code ContentA11yCreatedHandler} class listens for Alfresco events and 
@@ -78,15 +87,36 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
 
             nodeUpdateService.updateNodeA11yScore(uuid, testScore);
 
-            // TODO: Transmit documentContent and testScore to GenAI Stack
-            //  - at this (controller) point this could be
-            //      * the testScore as full report object
-            //      * or individual (failing) tests, which are then promptified on Python level ...
-            //          ... reserving text-level manipulation for the Python Stack definitely
-            //      ... both these options and sub options should be UI-triggerable <--- (Other TODO)
-            genAiClient.getAccessibleDocumentVersion(new ByteArrayInputStream(contentBytes), testScore);
+            // Get accessible PDF from GenAI stack
+            File accessibleVersion = genAiClient.getAccessibleDocumentVersion(new ByteArrayInputStream(contentBytes), testScore);
 
-            LOG.info("Document {} has been created with a11y-score and model", uuid);
+            // ✅ Do something useful with the returned PDF file
+            // For example: store it in Alfresco as a new version or related node
+            if (accessibleVersion != null && accessibleVersion.exists()) {
+                LOG.info("Uploading accessible version of document {} to Alfresco", uuid);
+                //nodeUpdateService.storeAccessibleVersion(uuid, accessibleVersion);
+
+                // Try to interpret content as UTF-8 text
+                try {
+                    byte[] accessibleBytes = Files.readAllBytes(accessibleVersion.toPath());
+                    String accessibleContent = new String(accessibleBytes, StandardCharsets.UTF_8);
+                    LOG.info("Accessible version content as UTF-8 text:\n{}", accessibleContent);
+                } catch (Exception textEx) {
+                    // If not readable as text, log Base64 preview
+                    try {
+                        byte[] accessibleBytes = Files.readAllBytes(accessibleVersion.toPath());
+                        String base64Preview = Base64.getEncoder().encodeToString(Arrays.copyOf(accessibleBytes, Math.min(100, accessibleBytes.length)));
+                        LOG.info("Accessible version is binary. Base64 preview:\n{}", base64Preview);
+                    } catch (IOException ioEx) {
+                        LOG.error("Error reading accessible PDF file: {}", ioEx.getMessage(), ioEx);
+                    }
+                }
+
+            } else {
+                LOG.warn("GenAI returned null or missing accessible PDF for document {}", uuid);
+            }
+
+            LOG.info("Document {} has been created with a11y-score and accessible version", uuid);
         } catch (Exception e) {
             LOG.error("Failed to fetch content for document {}: {}", uuid, e.getMessage());
         }

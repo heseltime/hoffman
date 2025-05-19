@@ -3,9 +3,11 @@ import base64
 import pycurl
 import json
 from io import BytesIO
+import io
 from urllib.parse import urlencode
 
 import traceback
+import uuid
 import requests
 
 import streamlit as st
@@ -23,9 +25,9 @@ from chains import (
     load_embedding_model,
     load_llm,
 )
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, UploadFile, File, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 
 import tempfile
 
@@ -47,6 +49,9 @@ os.environ["NEO4J_URL"] = url
 language = os.getenv("SUMMARY_LANGUAGE")
 summary_size = os.getenv("SUMMARY_SIZE")
 tags_number = os.getenv("TAGS_NUMBER")
+
+# A11y
+max_retries_default = os.getenv("MAX_RETRIES_LLM_LOOP_DEFAULT")
 
 logger = get_logger(__name__)
 
@@ -212,66 +217,89 @@ async def jsonify(file: UploadFile):
 
 
 @app.post("/accessible-document-version")
-async def new_version(
+async def accessible_document_version_raw_pdf(
     file: UploadFile = File(...),
-    metadata: str = Form(...)
+    metadata: str = Form(...),
+    max_retries_param: int = Query(None)
 ):
     try:
+        logger.info("📥 Received request at /accessible-document-version")
+
         if file.content_type != "application/pdf":
+            logger.warning("❌ Invalid file type: %s", file.content_type)
             raise ValueError(f"Invalid content type: {file.content_type}")
 
-        a11y_data = json.loads(metadata)
-        print("📊 Received A11y metadata:", json.dumps(a11y_data, indent=2))
-
         file_bytes = await file.read()
-        print(f"📎 ... for file(name): {file.filename}")
-        print(f"📦 ... with size: {len(file_bytes)} bytes")
-
         if not file_bytes:
+            logger.warning("❌ Uploaded file is empty.")
             raise ValueError("Uploaded file is empty")
+
+        logger.info("📎 Processing file: %s (%d bytes)", file.filename, len(file_bytes))
+
+        a11y_data = json.loads(metadata)
+        logger.info("📊 Parsed A11y metadata:\n%s", json.dumps(a11y_data, indent=2))
+
+        max_retries = max_retries_param or a11y_data.get("maxRetries", 2)
+        logger.info("📊 Obtained max LLM-retries: %d (max retries - by - default: %d)", max_retries, max_retries_default)
 
         doc = fitz.open(stream=file_bytes, filetype="pdf")
         extracted_text = "\n".join([page.get_text() for page in doc])
         doc.close()
-
-        print("📄 Extracted text length:", len(extracted_text))
+        logger.info("📄 Extracted text length: %d characters", len(extracted_text))
 
         prompt = (
-            "You are an assistant that improves document accessibility.\n\n"
-            "Accessibility metadata:\n"
+            "You are a highly specialized assistant that returns valid PDF files using raw PDF syntax.\n\n"
+            "Your task is to generate a simplified but valid PDF document that incorporates the following accessibility metadata:\n"
             f"{json.dumps(a11y_data, indent=2)}\n\n"
-            "Document content:\n"
-            f"{extracted_text[:5000]}...\n\n"
-            "Based on the content and metadata, suggest how to improve accessibility."
+            "Use the following document content as the main body of the PDF:\n"
+            f"{extracted_text[:5000]}\n\n"
+            "Return a complete, raw, syntactically valid PDF file as plain text.\n"
+            "Make sure your response begins with '%PDF-1.4' and ends with '%%EOF'.\n"
+            "Do not include any commentary, markdown, or additional formatting—only raw PDF code.\n"
         )
 
-        print("🧠 Prompt sent to LLM:\n", prompt)
+        response_text = ""
+        for attempt in range(1, max_retries + 1):
+            logger.info("🧠 Sending prompt to LLM (attempt %d/%d)...", attempt, max_retries)
+            response = requests.post(
+                f"{ollama_base_url}/api/generate",
+                json={
+                    "model": llm_name,
+                    "prompt": prompt,
+                    "stream": False
+                }
+            )
+            logger.info("🌐 LLM HTTP status: %d", response.status_code)
+            response.raise_for_status()
 
-        response = requests.post(
-            f"{ollama_base_url}/api/generate",
-            json={
-                "model": llm_name,
-                "prompt": prompt,
-                "stream": False
+            response_data = response.json()
+            response_text = response_data.get("response", "")
+            logger.info("🌐 LLM raw response:\n%s", response_text)
+
+            if response_text.startswith("%PDF") and response_text.strip().endswith("%%EOF"):
+                logger.info("✅ Received valid PDF response from LLM on attempt %d", attempt)
+            else:
+                logger.warning("⚠️ LLM response is not valid PDF code, saving anyway as .pdf text file.")
+
+        # Save to file: may not be needed or wanted ultimately (Alfresco question: stream the response for now, additionally)
+        output_filename = f"/tmp/genai_{uuid.uuid4()}.pdf"
+        with open(output_filename, "wb") as f:
+            f.write(response_text.encode("utf-8"))
+
+        logger.info("📄 PDF file written to: %s", output_filename)
+
+        return StreamingResponse(
+            io.BytesIO(response_text.encode("utf-8")),
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f'attachment; filename="accessible_version_{file.filename}"'
             }
         )
 
-        print("🌐 LLM HTTP response status:", response.status_code)
-        print("🌐 LLM response body:", response.text)
-
-        response.raise_for_status()
-        response_data = response.json()
-        answer = response_data.get("response", "[No response from LLM]")
-
-        return JSONResponse(
-            status_code=200,
-            content={"message": "LLM responded successfully", "response": answer, "model": llm_name}
-        )
-
     except Exception as e:
-        import logging
-        logging.exception("Exception in /accessible-document-version")
+        logger.exception("🔥 Exception in /accessible-document-version (raw PDF mode)")
         return JSONResponse(
             status_code=500,
             content={"error": str(e), "status": "failure"}
         )
+

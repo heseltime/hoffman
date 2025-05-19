@@ -210,40 +210,54 @@ public class GenAiClient {
 
     }
 
-    public void getAccessibleDocumentVersion(InputStream documentContent, A11yScore testScore) throws IOException {
+    public File getAccessibleDocumentVersion(InputStream documentContent, A11yScore testScore) throws IOException {
         // Convert InputStream to temporary File (OkHttp needs a concrete file or byte array )
         File tempFile = File.createTempFile("doc-upload-", UUID.randomUUID().toString() + ".pdf");
         Files.copy(documentContent, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
+    
+        File resultPdf = null;
+    
         try {
-			// Build JSON payload with score (as string or map)
-			MediaType mediaType = MediaType.parse("application/json");
-			String scoreJson = testScore.toJsonString(); // now full report in JSON, FROM the object (not using specific checker's report directly)
-
-			RequestBody requestBody = new MultipartBody.Builder()
-				.setType(MultipartBody.FORM)
-				.addFormDataPart("file", tempFile.getName(), RequestBody.create(tempFile, MediaType.parse("application/pdf")))
-				.addFormDataPart("metadata", null, RequestBody.create(scoreJson, mediaType))
-				.build();
-
-			Request request = new Request.Builder()
-				.url(genaiUrl + "/accessible-document-version") // <- Adjust the endpoint as needed
-				.post(requestBody)
-				.build();
-
-			Response response = client.newCall(request).execute();
-			if (!response.isSuccessful()) {
-				throw new IOException("Unexpected response from GenAI: " + response);
-			}
-
-            LOG.info("Successfully sent document and score to GenAI service");
-
+            // Convert testScore to JSON
+            MediaType mediaType = MediaType.parse("application/json");
+            String scoreJson = testScore.toJsonString();
+    
+            // Prepare the multipart request
+            RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", tempFile.getName(),
+                    RequestBody.create(tempFile, MediaType.parse("application/pdf")))
+                .addFormDataPart("metadata", null,
+                    RequestBody.create(scoreJson, mediaType))
+                .build();
+    
+            Request request = new Request.Builder()
+                .url(genaiUrl + "/accessible-document-version")
+                .post(requestBody)
+                .build();
+    
+            try (Response response = client.newCall(request).execute()) {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected response from GenAI: " + response);
+                }
+    
+                // Save the returned PDF stream to a new temp file: this save my also not be needed
+                resultPdf = File.createTempFile("accessible-version-", ".pdf");
+                try (InputStream is = response.body().byteStream()) {
+                    Files.copy(is, resultPdf.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+    
+                LOG.info("✅ GenAI returned accessible PDF, stored at: {}", resultPdf.getAbsolutePath());
+            }
+    
         } finally {
-			// Clean up temp file
-			if (tempFile.exists()) {
-			tempFile.delete();
-			}
+            // Clean up the uploaded source file
+            if (tempFile.exists()) {
+                tempFile.delete();
+            }
         }
-	}
+    
+        return resultPdf; // Return the generated PDF file for further processing
+    }    
 
 }
