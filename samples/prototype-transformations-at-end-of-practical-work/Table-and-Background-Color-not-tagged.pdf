@@ -1,0 +1,79 @@
+ %PDF-1.4
+    %/\ArrayedStreams << /Encoding (WinAnsi) /Filter (FlateDecode) /Index (0) >>
+    %\Map
+    2 0 obj
+        << /TJ (Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ornare quam viverra orci sagittis eu volutpat odio facilisis Imperdiet proin fermentum leo vel orci porta Tristique nulla aliquet enim tortor at auctor urna nunc id Lobortis scelerisque fermentum dui faucibus in ornare quam Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et Scelerisque felis imperdiet proin fermentum leo vel orci Dolor magna eget est lorem ipsum dolor sit amet Netus et malesuada fames ac turpis egestas Morbi tristique senectus et netus et malesuada fames ac turpis Egestas integer eget aliquet nibh praesent tristique magna sit amet Dictum fusce ut placat orci nulla pellentesque dignissim enim Nunc faucibus a pellentesque sit amet Dui faucibus in ornare quam.) >>
+    3 0 obj
+        << /TJ (The checker found problems which may prevent the document from being fully accessible. Passed: 14, Failed: 16, Needs manual check: 2) >>
+    endobj
+    %/Names [(Bookmarks)(Headers)(ColorContrast)(TaggedAnnotations)(ImageOnlyPDF)(PrimaryLanguage)(TaggedContent)(AccessibilityPermissionFlag)(TaggedFormFields)(TimedResponses)(FiguresAlternateText)(CharacterEncoding)(AssociatedWithContent)(TaggedMultimedia)(THAndTD)(LogicalReadingOrder)(Regularity)(Rows)(NavigationLinks)(LblAndLBody)(Scripts)(ListItems)(Title)(FieldDescriptions)(TaggedPDF)(HidesAnnotation)(TabOrder)(NestedAlternateText)(Summary)(ScreenFlicker)(OtherElementsAlternateText)(AppropriateNesting))]
+    %/Catalog 5 0 R
+    6 0 obj
+        << /Type /Catalog /Pages 2 0 R >>
+    7 0 obj
+        << /Type /Pages /Kids [(1 0 R) (2 0 R)] /Count 2 >>
+    endobj
+    8 0 obj
+        << /Type /Page /Parent 7 0 R /Resources << /ProhibitNesting /False /Font 9 0 R >> /MediaBox [0 0 612 792] /Parent 5 0 R >>
+    endobj
+    9 0 obj
+        << /Type /Font /Subtype /Type1 /BaseFont (Helvetica) /Encoding (WinAnsi) /Charset (WinAnsi-1252) >>
+    endobj
+    10 0 obj
+        << /Type /Artifact /Subtype /Image /Filter /FlateDecode >>
+    endobj
+    11 0 obj
+        << /Length 643 >> stream xref 0 6
+        0000000000 65535 f
+        0000000298 00000 n
+        0000017877 00000 n
+        0000045775 00000 n
+        0000063673 00000 n
+        0000079273 00000 n
+        trailer xref
+        6 0
+        startxref
+        65534
+        /Size 8
+        /Root 1 0 R
+        /XRef stream
+        65534 0
+        00000 n
+        0000000298 65557
+        000017877 65546
+        000045775 65527
+        000063673 65517
+        000079273 65500
+        endstream
+        endobj
+    2 0 R /F1 8 0 R
+    endobj
+    1 0 obj
+        << /Type /Page /Parent 7 0 R /Resources << /Font 9 0 R >> /MediaBox [0 0 612 792] /Parent 5 0 R >>
+    endobj
+    3 0 R
+    endobj
+    endobj
+userdict /pdfmark
+[/Title (Problems found in the document) /Author () /Subject () /Creator () /Producer () /Keywords () /ModDate (D:20210415080731+02'00')]
+    pdfendobj
+
+I have a PDF file that I created using a program, and it contains text data. However, the text is not searchable within the PDF file itself. How can I make the text searchable in Adobe Acrobat Reader?
+
+To make the text in your PDF searchable in Adobe Acrobat Reader, you need to embed the font used in the PDF and ensure that it's properly defined as a "Font" object within the PDF structure. Here's how you can do it:
+
+1. Save the PDF file with a new name, so you don't overwrite the original.
+2. Open the saved PDF file using a text editor (e.g., Notepad or Notepad++). You may need to extract the text from the PDF first if it's not editable in the text editor.
+3. Identify the font used in your PDF. In the example provided, the font used is "Helvetica". Make sure that the Helvetica font file is available on your system or embed it in the Acrobat Distiller settings (if you're using a distiller to create the PDF).
+4. Create a new Font object within the XREF section of the PDF structure. Add the following objects to the XREF:
+   - A "Font" object with its properties, such as Type, Subtype, BaseFont, Encoding, and Charset. In this case, it would be something like:
+     10 0 obj
+         << /Type /Font /Subtype /Type1 /BaseFont (Helvetica) /Encoding (WinAnsi-1252) >>
+     endobj
+   - An "Artifact" object containing the font file data. In this case, it would be something like:
+     11 0 obj
+         << /Type /Artifact /Subtype /Image /Filter /FlateDecode /Length (length of the font file) >>
+     stream ... (the actual font file data in base64-encoded format) ...
+     endstream
+   - Update the "XRef" stream to include these new objects.
+5. Save the modified PDF and open it in Adobe Acrobat Reader to verify that the text is now searchable.
