@@ -277,9 +277,9 @@ async def accessible_document_version_raw_pdf(
             logger.info("🌐 LLM raw response:\n%s", response_text)
 
             if response_text.startswith("%PDF") and response_text.strip().endswith("%%EOF"):
-                logger.info("✅ Received valid PDF response from LLM on attempt %d", attempt)
+                logger.info("Received valid PDF response from LLM on attempt %d", attempt)
             else:
-                logger.warning("⚠️ LLM response is not valid PDF code, saving anyway as .pdf text file.")
+                logger.warning("LLM response is not valid PDF code, saving anyway as .pdf text file.")
 
         # Save to file: may not be needed or wanted ultimately (Alfresco question: stream the response for now, additionally)
         output_filename = f"/tmp/genai_{uuid.uuid4()}.pdf"

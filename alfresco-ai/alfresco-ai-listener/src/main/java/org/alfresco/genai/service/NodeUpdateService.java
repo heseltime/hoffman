@@ -14,7 +14,11 @@ import org.alfresco.genai.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.core.io.InputStreamResource;
 
+import java.io.FileInputStream;
+import java.io.File;
+import java.nio.file.Files;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -314,10 +318,10 @@ public class NodeUpdateService {
     public void updateNodeA11yScore(String uuid, A11yScore score) {
         Map<String, Object> properties = new HashMap<>();
     
-        LOG.info("📝 Updating node {} with accessibility score data", uuid);
+        LOG.info("Updating node {} with accessibility score data", uuid);
     
         // Log full raw report for reference
-        LOG.debug("📄 Full A11yScore Report:\nSummary: {}\nRules: {}",
+        LOG.debug("Full A11yScore Report:\nSummary: {}\nRules: {}",
                 score.getSummaryDescription(),
                 score.getRuleResults());
     
@@ -378,7 +382,7 @@ public class NodeUpdateService {
     
     // Helper to log and put a property
     private void logAndPut(Map<String, Object> map, String key, Object value) {
-        LOG.debug("✅ Setting property {} = {}", key, value);
+        LOG.debug("Setting property {} = {}", key, value);
         map.put(key, value);
     }
     
@@ -388,11 +392,29 @@ public class NodeUpdateService {
         if (value != null) {
             logAndPut(map, propertyKey, value);
         } else {
-            LOG.warn("⚠️ Rule '{}' not found in A11yScore.getRuleResults()", ruleKey);
+            LOG.warn("Rule '{}' not found in A11yScore.getRuleResults()", ruleKey);
         }
     }
+
+    public void storeAccessibleVersion(String uuid, File accessibleVersion, boolean isMajorVersion) {
+        try {
+            byte[] content = Files.readAllBytes(accessibleVersion.toPath());
     
+            nodesApi.updateNodeContent(
+                    uuid,
+                    content,
+                    isMajorVersion,
+                    accessibleVersion.getName(),
+                    null,                             // contentType (null = auto-detect)
+                    null,                             // include
+                    null                              // fields
+            );
     
+            LOG.info("Stored accessible PDF version as new content for node {}", uuid);
+        } catch (Exception e) {
+            LOG.error("Failed to store accessible version for node {}: {}", uuid, e.getMessage(), e);
+        }
+    }
 
     /**
      * Gets the list of terms stored in the primary parent of the document uuid

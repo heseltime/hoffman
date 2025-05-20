@@ -43,6 +43,9 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
     @Value("${content.service.a11y.aspect}")
     private String a11yAspect;
 
+    @Value("${accessibility.pipeline.max.checking.retries}")
+    private String MAX_RETRIES_ACCESSIBILITY_CHECKING_LOOP;
+
     @Autowired
     private NodesApi nodesApi;
 
@@ -75,10 +78,18 @@ public class ContentA11yUpdatedHandler extends AbstractContentTypeHandler implem
                 return;
             }
 
-            A11yScore score = nodeStorageService.createA11yScoreFromNode(uuid);
+            A11yScore score = nodeStorageService.createA11yScoreFromNode(uuid); 
 
-            LOG.info("Score for document found in ContentA11yUpdatedHandler {}", uuid);
-            LOG.info(score.toString());
+            LOG.info("Triggered Updated Handler: Score for document found in ContentA11yUpdatedHandler {}", uuid);
+            LOG.info(score.toString()); // uses the old metadata score even if failure (this behavior is ok for now)
+
+            // Document-Updated-Pipeline Part ...
+            //  ... --(Leave commented out until valid PDFs at this point with usable A11yScore)--
+            //
+            //  - check score against a passing score criterion: either ACCEPT = make Major Version
+            //  - OR: RE-SEND to LLM if not passing and not at MAX_RETRIES_ACCESSIBILITY_CHECKING_LOOP
+            //          --> make new minor version and trigger new Updated-Handler Event
+
 
         } catch (Exception e) {
             LOG.error("Failed to fetch content for document {}: {}", uuid, e.getMessage());

@@ -43,9 +43,6 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
     @Value("${content.service.a11y.aspect}")
     private String a11yAspect;
 
-    @Value("${accessibility.pipeline.max.checking.retries}")
-    private String MAX_RETRIES_ACCESSIBILITY_CHECKING_LOOP;
-
     @Autowired
     private NodesApi nodesApi;
 
@@ -79,6 +76,8 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
                 return;
             }
 
+            // Might also need to check that this is not a (minor) sub-version!
+
             // Convert Resource to InputStream
             InputStream documentContent = resource.getInputStream();
             byte[] contentBytes = documentContent.readAllBytes();
@@ -93,18 +92,16 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
             // Get accessible PDF from GenAI stack
             File accessibleVersion = genAiClient.getAccessibleDocumentVersion(new ByteArrayInputStream(contentBytes), testScore);
 
-            // ✅ Do something useful with the returned PDF file
-            // For example: store it in Alfresco as a new version or related node
             if (accessibleVersion != null && accessibleVersion.exists()) {
                 LOG.info("Uploading accessible version of document {} to Alfresco", uuid);
-                //nodeUpdateService.storeAccessibleVersion(uuid, accessibleVersion);
 
-                // Try to interpret content as UTF-8 text
+                // Log document content (Try to interpret content as UTF-8 text)
                 try {
                     byte[] accessibleBytes = Files.readAllBytes(accessibleVersion.toPath());
                     String accessibleContent = new String(accessibleBytes, StandardCharsets.UTF_8);
                     LOG.info("Accessible version content as UTF-8 text:\n{}", accessibleContent);
                 } catch (Exception textEx) {
+
                     // If not readable as text, log Base64 preview
                     try {
                         byte[] accessibleBytes = Files.readAllBytes(accessibleVersion.toPath());
@@ -114,6 +111,9 @@ public class ContentA11yCreatedHandler implements OnNodeCreatedEventHandler {
                         LOG.error("Error reading accessible PDF file: {}", ioEx.getMessage(), ioEx);
                     }
                 }
+
+                // Save as new document version
+                nodeUpdateService.storeAccessibleVersion(uuid, accessibleVersion, false);
 
             } else {
                 LOG.warn("GenAI returned null or missing accessible PDF for document {}", uuid);

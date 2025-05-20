@@ -247,7 +247,7 @@ public class GenAiClient {
                     Files.copy(is, resultPdf.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 }
     
-                LOG.info("✅ GenAI returned accessible PDF, stored at: {}", resultPdf.getAbsolutePath());
+                LOG.info("GenAI returned accessible PDF, stored at: {}", resultPdf.getAbsolutePath());
             }
     
         } finally {
