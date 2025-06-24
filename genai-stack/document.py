@@ -355,6 +355,7 @@ async def accessible_document_version_flexible(
             "ET\n"
             "endstream\n\n"
         )
+        # Prompt B.2
         prompt = (
             "You are a finite-state PDF generator. Do not output any code or explanation—"
             "only raw PDF tokens.\n\n"
