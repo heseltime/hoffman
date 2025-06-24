@@ -1,0 +1,46 @@
+ %PDF-1.4
+    %\Keywords (Accessible PDF)
+    %\Title (Accessible PDF Test Document)
+    %\Author (Generator)
+    %\Creator (PDF Generator v1.0)
+    %\Producer (PDF Generator v1.0)
+    %\ModDate (D:20220531094700+00'00')
+    %\Subject (Accessibility Metadata Test Document)
+    %\Encrypt (true)
+    1 0 obj
+      << /Type /Catalog /Pages 2 0 R >>
+    endobj
+    2 0 obj
+      << /Type /Pages /Kids [3 0 R] /Count 1 >>
+    endobj
+    3 0 obj
+      << /Type /Page /Parent 2 0 R /Resources << /ProcSet (ProcSet) >> /MediaBox [0 0 612 792] /Contents 4 0 R /CropBox [0 0 612 792] >>
+    endobj
+    4 0 obj
+      << /Length 3117 >>
+      stream
+        %%Accessibility: (This is a test document for testing the accessibility features of PDFs)
+        /Metadata (
+          /Title (Test Document)
+          /Author (Generator)
+          /Producer (PDF Generator v1.0)
+          /Creator (PDF Generator v1.0)
+          /Subject (Accessibility Metadata Test Document)
+        )
+        /Resources << /ProceduralSet 5 0 R /Font (Helvetica) >>
+        /Contents 6 0 R
+        endobj
+        5 0 obj
+          << /Type /ProcSet >>
+        endobj
+        6 0 obj
+          << /Length 8144 >>
+          stream
+            BT
+              /F1 3 Tf
+              24 720 Td
+              (This is a test document for testing the accessibility features of PDFs) Tj
+            ET
+          endstream
+        endobj
+    %%EOF
