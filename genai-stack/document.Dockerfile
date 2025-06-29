@@ -19,6 +19,7 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 # Copy your app code
 COPY document.py .
 COPY chains.py .
+COPY utils.py .
 
 # Optional: copy .env if used in container
 # COPY .env .
