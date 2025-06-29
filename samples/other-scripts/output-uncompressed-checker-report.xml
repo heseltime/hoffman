@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report>
+  <buildInformation>
+    <releaseDetails id="core" version="1.28.1" buildDate="2025-04-29T17:03:00+02:00"></releaseDetails>
+    <releaseDetails id="validation-model" version="1.28.1" buildDate="2025-04-29T19:05:00+02:00"></releaseDetails>
+    <releaseDetails id="gui" version="1.28.1" buildDate="2025-05-24T21:54:00+02:00"></releaseDetails>
+  </buildInformation>
+  <jobs>
+    <job>
+      <item size="932">
+        <name>/Users/jack/Public/hoffman/samples/other-scripts/output-uncompressed.pdf</name>
+      </item>
+      <validationReport jobEndStatus="normal" profileName="PDF/A-1B validation profile" statement="PDF file is not compliant with Validation Profile requirements." isCompliant="false">
+        <details passedRules="124" failedRules="5" passedChecks="163" failedChecks="12">
+          <rule specification="ISO 19005-1:2005" clause="6.3.4" testNumber="1" status="failed" failedChecks="1">
+            <description>The font programs for all fonts used within a conforming file shall be embedded within that file, as defined in PDF Reference 5.8, except when the fonts are used exclusively with text rendering mode 3</description>
+            <object>PDFont</object>
+            <test>Subtype == "Type3" || Subtype == "Type0" || renderingMode == 3 || containsFontFile == true</test>
+            <check status="failed">
+              <context>root/document[0]/pages[0](3 0 obj PDPage)/contentStream[0](5 0 obj PDContentStream)/operators[3]/font[0](Helvetica)</context>
+              <errorMessage>The font program is not embedded</errorMessage>
+            </check>
+          </rule>
+          <rule specification="ISO 19005-1:2005" clause="6.1.8" testNumber="1" status="failed" failedChecks="5">
+            <description>The object number and generation number shall be separated by a single white-space character. The generation number and obj keyword shall be separated by a single white-space character. The object number and endobj keyword shall each be preceded by an EOL marker. The obj and endobj keywords shall each be followed by an EOL marker</description>
+            <object>CosIndirect</object>
+            <test>spacingCompliesPDFA</test>
+            <check status="failed">
+              <context>root/indirectObjects[0](5 0)</context>
+              <errorMessage>Extra spacings or missing EOL characters around indirect object/generation number or keywords 'obj' and 'endobj'</errorMessage>
+            </check>
+            <check status="failed">
+              <context>root/indirectObjects[1](4 0)</context>
+              <errorMessage>Extra spacings or missing EOL characters around indirect object/generation number or keywords 'obj' and 'endobj'</errorMessage>
+            </check>
+            <check status="failed">
+              <context>root/indirectObjects[2](3 0)</context>
+              <errorMessage>Extra spacings or missing EOL characters around indirect object/generation number or keywords 'obj' and 'endobj'</errorMessage>
+            </check>
+            <check status="failed">
+              <context>root/indirectObjects[3](2 0)</context>
+              <errorMessage>Extra spacings or missing EOL characters around indirect object/generation number or keywords 'obj' and 'endobj'</errorMessage>
+            </check>
+            <check status="failed">
+              <context>root/indirectObjects[4](1 0)</context>
+              <errorMessage>Extra spacings or missing EOL characters around indirect object/generation number or keywords 'obj' and 'endobj'</errorMessage>
+            </check>
+          </rule>
+          <rule specification="ISO 19005-1:2005" clause="6.1.3" testNumber="1" status="failed" failedChecks="1">
+            <description>The file trailer dictionary shall contain the ID keyword. The file trailer referred to is either the last trailer dictionary in a PDF file, as described in PDF Reference 3.4.4 and 3.4.5, or the first page trailer in a linearized PDF file, as described in PDF Reference F.2</description>
+            <object>CosDocument</object>
+            <test>(isLinearized == true) ? (firstPageID != null) : (lastID != null)</test>
+            <check status="failed">
+              <context>root</context>
+              <errorMessage>Missing ID in the document trailer</errorMessage>
+            </check>
+          </rule>
+          <rule specification="ISO 19005-1:2005" clause="6.7.2" testNumber="1" status="failed" failedChecks="1">
+            <description>The document catalog dictionary of a conforming file shall contain the Metadata key. The metadata stream dictionary shall contain entry Type with value /Metadata and entry Subtype with value /XML</description>
+            <object>PDDocument</object>
+            <test>containsMetadata == true</test>
+            <check status="failed">
+              <context>root/document[0]</context>
+              <errorMessage>The document catalog dictionary doesn't contain metadata key or metadata stream dictionary does not contain either entry Type with value /Metadata or entry Subtype with value /XML</errorMessage>
+            </check>
+          </rule>
+          <rule specification="ISO 19005-1:2005" clause="6.2.3.3" testNumber="3" status="failed" failedChecks="4">
+            <description>If an uncalibrated colour space is used in a file then that file shall contain a PDF/A-1 OutputIntent, as defined in 6.2.2</description>
+            <object>PDDeviceGray</object>
+            <test>gOutputCS != null</test>
+            <check status="failed">
+              <context>root/document[0]/pages[0](3 0 obj PDPage)/contentStream[0](5 0 obj PDContentStream)/operators[3]/fillCS[0]</context>
+              <errorMessage>DeviceGray colour space is used without output intent profile</errorMessage>
+            </check>
+            <check status="failed">
+              <context>root/document[0]/pages[0](3 0 obj PDPage)/contentStream[0](5 0 obj PDContentStream)/operators[8]/fillCS[0]</context>
+              <errorMessage>DeviceGray colour space is used without output intent profile</errorMessage>
+            </check>
+            <check status="failed">
+              <context>root/document[0]/pages[0](3 0 obj PDPage)/contentStream[0](5 0 obj PDContentStream)/operators[13]/fillCS[0]</context>
+              <errorMessage>DeviceGray colour space is used without output intent profile</errorMessage>
+            </check>
+            <check status="failed">
+              <context>root/document[0]/pages[0](3 0 obj PDPage)/contentStream[0](5 0 obj PDContentStream)/operators[18]/fillCS[0]</context>
+              <errorMessage>DeviceGray colour space is used without output intent profile</errorMessage>
+            </check>
+          </rule>
+        </details>
+      </validationReport>
+      <duration start="1751215826116" finish="1751215826280">00:00:00.164</duration>
+    </job>
+  </jobs>
+  <batchSummary totalJobs="1" failedToParse="0" encrypted="0" outOfMemory="0" veraExceptions="0">
+    <validationReports compliant="0" nonCompliant="1" failedJobs="0">1</validationReports>
+    <featureReports failedJobs="0">0</featureReports>
+    <repairReports failedJobs="0">0</repairReports>
+    <duration start="1751215826100" finish="1751215826295">00:00:00.195</duration>
+  </batchSummary>
+</report>
