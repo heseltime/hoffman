@@ -1,0 +1,84 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj 
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj 
+2 0 obj 
+<<
+/Kids [3 0 R]
+/Type /Pages
+/Count 1
+>>
+endobj 
+3 0 obj 
+<<
+/pdftk_PageNum 1
+/Resources 
+<<
+/Font 
+<<
+/F1 4 0 R
+>>
+>>
+/Contents 5 0 R
+/Parent 2 0 R
+/Type /Page
+/MediaBox [0 0 595 842]
+>>
+endobj 
+5 0 obj 
+<<
+/Length 351
+>>
+stream
+BT
+/F1 16 Tf
+72 770 Td
+(Accessibility in PDFs) Tj
+ET
+
+BT
+/F1 12 Tf
+72 740 Td
+(Accessibility in PDF documents ensures that all users, including those using screen readers, can access content.) Tj
+ET
+
+BT
+/F1 16 Tf
+72 700 Td
+(Common Issues) Tj
+ET
+
+BT
+/F1 12 Tf
+72 670 Td
+(Many PDFs lack semantic tags, proper reading order, or alt text for images.) Tj
+ET
+endstream 
+endobj 
+4 0 obj 
+<<
+/Subtype /Type1
+/Type /Font
+/BaseFont /Helvetica
+>>
+endobj xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000066 00000 n 
+0000000125 00000 n 
+0000000677 00000 n 
+0000000272 00000 n 
+trailer
+
+<<
+/Root 1 0 R
+/Size 6
+>>
+startxref
+748
+%%EOF
