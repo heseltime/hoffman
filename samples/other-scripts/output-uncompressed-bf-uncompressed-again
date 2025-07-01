@@ -1,0 +1,612 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj 
+<<
+/Metadata 2 0 R
+/AcroForm 3 0 R
+/Lang (en)
+/MarkInfo 
+<<
+/Marked true
+>>
+/ViewerPreferences 
+<<
+/DisplayDocTitle true
+>>
+/Type /Catalog
+/Pages 4 0 R
+/StructTreeRoot 5 0 R
+>>
+endobj 
+4 0 obj 
+<<
+/Kids [6 0 R]
+/Type /Pages
+/Count 1
+>>
+endobj 
+6 0 obj 
+<<
+/pdftk_PageNum 1
+/Tabs /S
+/StructParents 0
+/Resources 
+<<
+/Font 
+<<
+/T1_0 7 0 R
+>>
+/ProcSet [/PDF /Text]
+>>
+/Type /Page
+/Parent 4 0 R
+/Contents 8 0 R
+/MediaBox [0 0 595 842]
+>>
+endobj 
+7 0 obj 
+<<
+/ToUnicode 9 0 R
+/Subtype /Type1
+/Type /Font
+/BaseFont /Helvetica
+>>
+endobj 
+3 0 obj 
+<<
+/DR 
+<<
+/Font 
+<<
+/Helv 10 0 R
+/ZaDb 11 0 R
+>>
+/Encoding 
+<<
+/PDFDocEncoding 12 0 R
+>>
+>>
+/DA (/Helv 0 Tf 0 g )
+/Fields []
+>>
+endobj 
+2 0 obj 
+<<
+/Subtype /XML
+/Type /Metadata
+/Length 3744
+>>
+stream
+<?xpacket begin="Ôªø" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 9.1-c001 79.675d0f7, 2023/06/11-19:21:16        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/"
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/">
+         <dc:format>application/pdf</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">Accessibility in PDFs</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <dc:description>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">Accessibility in PDFs</rdf:li>
+            </rdf:Alt>
+         </dc:description>
+         <dc:creator>
+            <rdf:Bag>
+               <rdf:li>Jack Heseltine</rdf:li>
+            </rdf:Bag>
+         </dc:creator>
+         <dc:subject>
+            <rdf:Bag>
+               <rdf:li>Accessibility</rdf:li>
+               <rdf:li>PDFs</rdf:li>
+            </rdf:Bag>
+         </dc:subject>
+         <pdf:Keywords>Accessibility, PDFs</pdf:Keywords>
+         <xmp:ModifyDate>2025-06-29T19:06:37+02:00</xmp:ModifyDate>
+         <xmp:CreateDate>2025-06-29T19:06:37+02:00</xmp:CreateDate>
+         <xmp:MetadataDate>2025-06-29T19:06:37+02:00</xmp:MetadataDate>
+         <xmpMM:DocumentID>uuid:c63fee3c-90f9-5243-a6c5-2baf1e4a7e7b</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:745a5fb5-88bf-244a-ae4b-65834bae84ae</xmpMM:InstanceID>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+endstream 
+endobj 
+5 0 obj 
+<<
+/K [13 0 R 14 0 R 15 0 R 16 0 R]
+/ParentTreeNextKey 1
+/Type /StructTreeRoot
+/ParentTree 17 0 R
+/IDTree 18 0 R
+/ClassMap 19 0 R
+>>
+endobj 
+19 0 obj 
+<<
+/CM2 
+<<
+/SpaceAfter 15.625
+/O /Layout
+>>
+/CM1 
+<<
+/TextAlign /Justify
+/O /Layout
+>>
+>>
+endobj 
+18 0 obj 
+<<
+/Names [(AD250605-1645-25.1.20529-ADBE-000000000017) 13 0 R (AD250605-1645-25.1.20529-ADBE-000000000019) 14 0 R (AD250605-1645-25.1.20529-ADBE-000000000021) 15 0 R (AD250605-1645-25.1.20529-ADBE-000000000023) 16 0 R]
+>>
+endobj 
+17 0 obj 
+<<
+/Nums [0 20 0 R]
+>>
+endobj 
+20 0 obj [13 0 R 14 0 R 15 0 R 16 0 R]
+endobj 
+13 0 obj 
+<<
+/K 0
+/ID (AD250605-1645-25.1.20529-ADBE-000000000017)
+/Pg 6 0 R
+/S /P
+/C [/CM1 /CM2]
+/P 5 0 R
+>>
+endobj 
+14 0 obj 
+<<
+/K 1
+/ID (AD250605-1645-25.1.20529-ADBE-000000000019)
+/Pg 6 0 R
+/S /P
+/A 21 0 R
+/P 5 0 R
+>>
+endobj 
+15 0 obj 
+<<
+/K 2
+/ID (AD250605-1645-25.1.20529-ADBE-000000000021)
+/Pg 6 0 R
+/S /P
+/C [/CM1 /CM2]
+/P 5 0 R
+>>
+endobj 
+16 0 obj 
+<<
+/K 3
+/ID (AD250605-1645-25.1.20529-ADBE-000000000023)
+/Pg 6 0 R
+/S /P
+/A 22 0 R
+/P 5 0 R
+>>
+endobj 
+22 0 obj 
+<<
+/O /Layout
+>>
+endobj 
+8 0 obj 
+<<
+/Length 446
+>>
+stream
+BT
+/P <</MCID 0 >>BDC 
+/T1_0 1 Tf
+16 0 0 16 72 770 Tm
+(Accessibility in PDFs )Tj
+EMC 
+/P <</MCID 1 >>BDC 
+12 0 0 12 72 740 Tm
+(Accessibility in PDF documents ensures that all users, including those u\sing screen readers, can access content. )Tj
+EMC 
+/P <</MCID 2 >>BDC 
+16 0 0 16 72 700 Tm
+(Common Issues )Tj
+EMC 
+/P <</MCID 3 >>BDC 
+12 0 0 12 72 670 Tm
+(Many PDFs lack semantic tags, proper reading order, or alt text for imag\es. )Tj
+EMC 
+ET
+
+endstream 
+endobj 
+9 0 obj 
+<<
+/Length 3778
+>>
+stream
+/CIDInit /ProcSet findresource begin
+12 dict begin
+begincmap
+/CIDSystemInfo <<
+/Registry (Adobe)
+/Ordering (SI-Helvetica)
+/Supplement 0
+>> def
+/CMapName /Adobe-SI-Helvetica-0 def
+/CMapType 2 def
+2 begincodespacerange
+<00> <EF>
+<F000> <FFFF>
+endcodespacerange
+100 beginbfchar
+<00> <FFFD>
+<00> <FFFD>
+<01> <0001>
+<02> <0002>
+<03> <0003>
+<04> <0004>
+<05> <0005>
+<06> <0006>
+<07> <0007>
+<08> <0008>
+<09> <0009>
+<0A> <000A>
+<0B> <000B>
+<0C> <000C>
+<0D> <000D>
+<0E> <000E>
+<0F> <000F>
+<10> <0010>
+<11> <0011>
+<12> <0012>
+<13> <0013>
+<14> <0014>
+<15> <0015>
+<16> <0016>
+<17> <0017>
+<18> <02D8>
+<19> <02C7>
+<1A> <02C6>
+<1B> <02D9>
+<1C> <02DD>
+<1D> <02DB>
+<1E> <00B0>
+<1F> <02DC>
+<20> <0020>
+<21> <0021>
+<22> <0022>
+<23> <0023>
+<24> <0024>
+<25> <0025>
+<26> <0026>
+<27> <2019>
+<28> <0028>
+<29> <0029>
+<2A> <002A>
+<2B> <002B>
+<2C> <002C>
+<2D> <002D>
+<2E> <002E>
+<2F> <002F>
+<30> <0030>
+<31> <0031>
+<32> <0032>
+<33> <0033>
+<34> <0034>
+<35> <0035>
+<36> <0036>
+<37> <0037>
+<38> <0038>
+<39> <0039>
+<3A> <003A>
+<3B> <003B>
+<3C> <003C>
+<3D> <003D>
+<3E> <003E>
+<3F> <003F>
+<40> <0040>
+<41> <0041>
+<42> <0042>
+<43> <0043>
+<44> <0044>
+<45> <0045>
+<46> <0046>
+<47> <0047>
+<48> <0048>
+<49> <0049>
+<4A> <004A>
+<4B> <004B>
+<4C> <004C>
+<4D> <004D>
+<4E> <004E>
+<4F> <004F>
+<50> <0050>
+<51> <0051>
+<52> <0052>
+<53> <0053>
+<54> <0054>
+<55> <0055>
+<56> <0056>
+<57> <0057>
+<58> <0058>
+<59> <0059>
+<5A> <005A>
+<5B> <005B>
+<5C> <005C>
+<5D> <005D>
+<5E> <005E>
+<5F> <005F>
+<60> <2018>
+<61> <0061>
+<62> <0062>
+endbfchar
+100 beginbfchar
+<63> <0063>
+<64> <0064>
+<65> <0065>
+<66> <0066>
+<67> <0067>
+<68> <0068>
+<69> <0069>
+<6A> <006A>
+<6B> <006B>
+<6C> <006C>
+<6D> <006D>
+<6E> <006E>
+<6F> <006F>
+<70> <0070>
+<71> <0071>
+<72> <0072>
+<73> <0073>
+<74> <0074>
+<75> <0075>
+<76> <0076>
+<77> <0077>
+<78> <0078>
+<79> <0079>
+<7A> <007A>
+<7B> <007B>
+<7C> <007C>
+<7D> <007D>
+<7E> <007E>
+<7F> <FFFD>
+<80> <2022>
+<81> <2020>
+<82> <2021>
+<83> <2026>
+<84> <2014>
+<85> <2013>
+<86> <0192>
+<87> <2044>
+<88> <2039>
+<89> <203A>
+<8A> <2212>
+<8B> <2030>
+<8C> <201E>
+<8D> <201C>
+<8E> <201D>
+<8F> <2018>
+<90> <2019>
+<91> <201A>
+<92> <2122>
+<93> <FB01>
+<94> <FB02>
+<95> <0141>
+<96> <0152>
+<97> <0160>
+<98> <0178>
+<99> <017D>
+<9A> <0131>
+<9B> <0142>
+<9C> <0153>
+<9D> <0161>
+<9E> <017E>
+<9F> <FFFD>
+<A0> <20AC>
+<A1> <00A1>
+<A2> <00A2>
+<A3> <00A3>
+<A4> <2044>
+<A5> <00A5>
+<A6> <0192>
+<A7> <00A7>
+<A8> <00A4>
+<A9> <0027>
+<AA> <201C>
+<AB> <00AB>
+<AC> <2039>
+<AD> <203A>
+<AE> <FB01>
+<AF> <FB02>
+<B0> <00B0>
+<B1> <2013>
+<B2> <2020>
+<B3> <2021>
+<B4> <00B7>
+<B5> <00B5>
+<B6> <00B6>
+<B7> <2022>
+<B8> <201A>
+<B9> <201E>
+<BA> <201D>
+<BB> <00BB>
+<BC> <2026>
+<BD> <2030>
+<BE> <00BE>
+<BF> <00BF>
+<C0> <00C0>
+<C1> <0060>
+<C2> <00B4>
+<C3> <02C6>
+<C4> <02DC>
+<C5> <00AF>
+<C6> <02D8>
+endbfchar
+56 beginbfchar
+<C7> <02D9>
+<C8> <00A8>
+<C9> <00C9>
+<CA> <00B0>
+<CB> <00B8>
+<CC> <00CC>
+<CD> <02DD>
+<CE> <02DB>
+<CF> <02C7>
+<D0> <2014>
+<D1> <00D1>
+<D2> <00D2>
+<D3> <00D3>
+<D4> <00D4>
+<D5> <00D5>
+<D6> <00D6>
+<D7> <00D7>
+<D8> <00D8>
+<D9> <00D9>
+<DA> <00DA>
+<DB> <00DB>
+<DC> <00DC>
+<DD> <00DD>
+<DE> <00DE>
+<DF> <00DF>
+<E0> <00E0>
+<E1> <00C6>
+<E2> <00E2>
+<E3> <00AA>
+<E4> <00E4>
+<E5> <00E5>
+<E6> <00E6>
+<E7> <00E7>
+<E8> <0141>
+<E9> <00D8>
+<EA> <0152>
+<EB> <00BA>
+<EC> <00EC>
+<ED> <00ED>
+<EE> <00EE>
+<EF> <00EF>
+<F000> <00F0>
+<F001> <00E6>
+<F002> <00F2>
+<F003> <00F3>
+<F004> <00F4>
+<F005> <0131>
+<F006> <00F6>
+<F007> <00F7>
+<F008> <0142>
+<F009> <00F8>
+<F00A> <0153>
+<F00B> <00DF>
+<F00C> <00FC>
+<F00D> <00FD>
+<F00E> <00FE>
+endbfchar
+endcmap
+CMapName currentdict /CMap defineresource pop
+end
+end
+endstream 
+endobj 
+21 0 obj 
+<<
+/SpaceAfter 20.75
+/O /Layout
+>>
+endobj 
+10 0 obj 
+<<
+/Encoding 12 0 R
+/Subtype /Type1
+/Name /Helv
+/Type /Font
+/BaseFont /Helvetica
+>>
+endobj 
+11 0 obj 
+<<
+/Subtype /Type1
+/Name /ZaDb
+/Type /Font
+/BaseFont /ZapfDingbats
+>>
+endobj 
+12 0 obj 
+<<
+/Type /Encoding
+/Differences [24 /breve /caron /circumflex /dotaccent /hungarumlaut /ogonek /ring /tilde 39 /quotesingle 96 /grave 128 /bullet /dagger /daggerdbl /ellipsis /emdash /endash /florin /fraction /guilsinglleft /guilsinglright /minus /perthousand /quotedblbase /quotedblleft /quotedblright /quoteleft /quoteright /quotesinglbase /trademark /fi /fl /Lslash /OE /Scaron /Ydieresis /Zcaron /dotlessi /lslash /oe /scaron /zcaron 160 /Euro 164 /currency 166 /brokenbar 168 /dieresis /copyright /ordfeminine 172 /logicalnot /.notdef /registered /macron /degree /plusminus /twosuperior /threesuperior /acute /mu 183 /periodcentered /cedilla /onesuperior /ordmasculine 188 /onequarter /onehalf /threequarters 192 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls /agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla /egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis /eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide /oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis]
+>>
+endobj 
+23 0 obj 
+<<
+/ModDate (D:20250629190637+02'00')
+/Subject (Accessibility in PDFs)
+/CreationDate (D:20250629190637+02'00')
+/Author (Jack Heseltine)
+/Keywords (Accessibility, PDFs)
+/Title (Accessibility in PDFs)
+>>
+endobj xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000700 00000 n 
+0000000554 00000 n 
+0000000209 00000 n 
+0000004529 00000 n 
+0000000268 00000 n 
+0000000465 00000 n 
+0000005614 00000 n 
+0000006114 00000 n 
+0000010000 00000 n 
+0000010102 00000 n 
+0000010190 00000 n 
+0000005117 00000 n 
+0000005235 00000 n 
+0000005348 00000 n 
+0000005466 00000 n 
+0000005029 00000 n 
+0000004788 00000 n 
+0000004679 00000 n 
+0000005070 00000 n 
+0000009947 00000 n 
+0000005579 00000 n 
+0000011517 00000 n 
+trailer
+
+<<
+/Info 23 0 R
+/ID [<ccb1c7222e464725ae75da3a4cbf72d1> <ccb1c7222e464725ae75da3a4cbf72d1>]
+/Root 1 0 R
+/Size 24
+>>
+startxref
+11736
+%%EOF
