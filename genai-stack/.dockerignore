@@ -1,5 +1,8 @@
 *
 !*.py
+!*.ipynb
+!ipynb-input/**
+!ipynb-output/**
 !requirements.txt
 !images/*
 !front-end/*

@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     poppler-utils \
     tesseract-ocr \
-    qpdf \
     libmagic1 \
     && rm -rf /var/lib/apt/lists/*
 
@@ -22,13 +21,9 @@ RUN pip install jupyterlab
 
 # Copy your app code
 COPY document.py .
+COPY document.ipynb .
 COPY chains.py .
 COPY utils.py .
-
-# Core notebooks as well, together with notebooks/ mounted subdirectory
-COPY document.ipynb .
-COPY ipynb-input/ ipynb-input/
-COPY ipynb-output/ ipynb-output/
 
 # Optional: copy .env if used in container
 # COPY .env .
