@@ -7,6 +7,7 @@ streamlit
 sentence_transformers
 Pillow
 fastapi
+fpdf
 PyPDF2
 pydantic
 uvicorn

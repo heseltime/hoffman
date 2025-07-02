@@ -29,6 +29,7 @@ COPY utils.py .
 COPY document.ipynb .
 COPY ipynb-input/ ipynb-input/
 COPY ipynb-output/ ipynb-output/
+COPY ipynb-examples/ ipynb-examples/
 
 # Optional: copy .env if used in container
 # COPY .env .

@@ -1,0 +1,11 @@
+It appears that you have provided a PostScript code for an illustration with a caption. Here's how to interpret it:
+
+1. The image file used is from iStockphoto.com and was created by Jamie Lee.
+2. The text "Illustration" is the title of the illustration.
+3. The following lines define the position, size, and rotation (if any) of the text in the output PDF or PostScript document.
+4. In this case, the text "(iStockphoto.com)" and "(Jamie Lee)" are placed on separate lines (newlines indicated by `Tj` command) and aligned to the left with a 12pt indent (`.153 Tw` command). The actual text is centered along the y-axis of its bounding box, as specified by the `Tm` command.
+5. The final line `ET` ends the text block in PostScript.
+6. After the text, there are commands related to color and font settings:
+   - BT sets the graphics state for drawing (e.g., color mode, font). In this case, a grayscale color mode is set with 0.48 for the black component and 0.766 for the white component using the `scn` command, and Font3 is selected using the `/F3 1 Tf` command.
+7. The last line `Q` ends the graphics state change, indicating that subsequent PostScript commands will be drawn with the default settings (in this case, with the grayscale color mode and font F3).
+endstream
