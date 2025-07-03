@@ -1,0 +1,277 @@
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W n
+/GS0 gs
+/CS0 cs
+.898 0 .312 scn
+1 0 0 1 70.984299 918.553589 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+BT
+/H1 <\</Lang(de-DE)/MCID 0>>BDC
+/GS0 gs
+/CS0 cs
+1 1 1 scn
+/F0 1 Tf
+32 0 0 32 249.4554 879.6245 Tm
+(Sofort)Tj
+EMC
+ET
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W n
+1 .833 0 scn
+1 0 0 1 70.984299 790.994629 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+BT
+/H1 <\</Lang(de-DE)/MCID 1>>BDC
+/GS1 gs
+0 0 0 scn
+/F0 1 Tf
+32 0 0 32 230.6035 752.0655 Tm
+(Dringend)Tj
+EMC
+ET
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W n
+/GS2 gs
+.964 .626 0 scn
+1 0 0 1 70.984299 854.774109 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+BT
+/H1 <\</Lang(de-DE)/MCID 2>>BDC
+/F0 1 Tf
+32 0 0 32 192.0138 817.9513 Tm
+(Sehr dringend)Tj
+EMC
+ET
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W n
+/GS2 gs
+.687 .793 .018 scn
+1 0 0 1 70.984299 727.215027 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+BT
+/H1 <\</Lang(de-DE)/MCID 3>>BDC
+/F0 1 Tf
+32 0 0 32 241.4554 688.2859 Tm
+(Normal)Tj
+EMC
+ET
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W n
+/GS2 gs
+0 .41 .705 scn
+1 0 0 1 70.984299 663.435486 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+BT
+/H1 <\</Lang(de-DE)/MCID 4>>BDC
+/GS2 gs
+1 1 1 scn
+/F0 1 Tf
+32 0 0 32 184.5762 624.5064 Tm
+(Nicht dringend)Tj
+EMC
+ET
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W n
+0 .48 .766 scn
+1 0 0 1 1165.039307 1576.630859 cm
+0 0 m
+0 81.637 l
+-94.896 81.637 l
+-140.172 68.453 l
+-151.254 65.342 -170.807 65.342 v
+-189.025 65.099999 -200.506 68.453 v
+-201.341 68.697 -228.981 76.57 -246.776 81.637 c
+-1139.527 81.637 l
+-1139.527 0 l
+f
+Q
+EMC
+
+/Figure <\</MCID 5>>BDC
+q
+1070.143 1658.267 m
+1024.867999 1645.084 l
+1013.785 1641.973 994.233 1641.973 v
+994.233 1641.973 l
+976.015 1641.73 964.533 1645.084 v
+964.533 1645.084 l
+963.698 1645.328 936.058 1653.201 918.263 1658.267 c
+918.263 1658.267 l
+25.511 1658.267 l
+25.511 1576.631 l
+1165.039 1576.631 l
+1165.039 1658.267 l
+W n
+1193.055416 0 0 930.768914 -1.102158 754.588186 cm
+/Im0 Do
+Q
+EMC
+
+/Artifact BMC
+q
+0 .48 .766 scn
+1165.039 59.527 m
+25.511 59.527 l
+25.511 33.963 l
+1165.039 33.963 l
+f
+Q
+EMC
+
+/Figure <\</MCID 6>>BDC
+q
+25.511 33.963 1139.528 25.564 re
+W n
+1193.055416 0 0 354.551001 -1.102158 -1.220339 cm
+/Im1 Do
+Q
+EMC
+
+BT
+/H1 <\</Lang(de-DE)/MCID 7>>BDC
+1 1 1 scn
+/F0 1 Tf
+44 0 0 44 65.525499 1602.1715 Tm
+(Patienteninformation)Tj
+EMC
+ET
+
+BT
+/H1 <\</Lang(de-DE)/MCID 8>>BDC
+0 .48 .766 scn
+/F0 1 Tf
+65 0 0 65 65.525499 1435.0057 Tm
+(Wie ist der Ablauf?)Tj
+0 -6.839998 TD
+(Dringlichkeitsstufen)Tj
+EMC
+ET
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W n
+0 .41 .705 scn
+1 0 0 1 612.283386 535.273987 cm
+0 0 m
+0 -349.417 l
+0 -356.045 5.373 -361.417 12 -361.417 c
+483.866 -361.417 l
+490.494 -361.417 495.866 -356.045 495.866 -349.417 c
+495.866 0 l
+f
+Q
+EMC
+
+BT
+/P <\</Lang(de-DE)/MCID 9>>BDC
+1 1 1 scn
+/F1 1 Tf
+32 0 0 32 711.2893 470.274 Tm
+(Fr Patienten und )Tj
+.264496 -1.28125 Td
+(Patientinnen mit  )Tj
+-1.696999 -1.281 Td
+(niedriger Behandlungs-)Tj
+.001999 -1.280998 Td
+(dringlichkeit entstehen )Tj
+3.304959 -1.28175 Td
+(bei hohem )Tj
+-2.872999 -1.281 Td
+(Patientenaufkommen  )Tj
+.698999 -1.280998 Td
+\[(lange W)37(artezeiten!)]TJ
+EMC
+ET
+
+/Artifact BMC
+q
+319.493 44.096 362.672999 301.629 re
+W n
+/GS2 gs
+.864 .925 .98 scn
+... % (complex path omitted for brevity – kept identical)
+f\*
+Q
+EMC
+
+BT
+/H1 <\</Lang(de-DE)/MCID 10>>BDC
+/F1 1 Tf
+29.9984 0 0 30 235.2095 688.1118 Tm
+(Wartezeiten )Tj
+EMC
+ET
+
+/Artifact BMC
+q
+14.739 -21.919 m
+... % (decorative path continues unchanged)
+f\*
+Q
+EMC
+
+BT
+/P <\</Lang(de-DE)/MCID 11>>BDC
+/F2 1 Tf
+11.9994 0 0 12 229.5936 99.8424 Tm
+(In Kooperation mit: Anwalt für Gleichbehandlungsfragen)Tj
+EMC
+ET

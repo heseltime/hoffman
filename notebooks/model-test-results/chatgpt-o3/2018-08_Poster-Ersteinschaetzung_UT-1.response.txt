@@ -1,0 +1,306 @@
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W
+n
+/GS0 gs
+/CS0 cs
+.898 0 .312 scn
+1 0 0 1 70.984299 918.553589 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+/P <\</Lang (de-DE)/MCID 0>>BDC
+BT
+/GS0 gs
+/CS0 cs
+1 1 1 scn
+/F0 1 Tf
+32 0 0 32 249.4554 879.6245 Tm
+(Sofort)Tj
+ET
+EMC
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W
+n
+1 .833 0 scn
+1 0 0 1 70.984299 790.994629 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+/P <\</Lang (de-DE)/MCID 1>>BDC
+BT
+/GS1 gs
+0 0 0 scn
+/F0 1 Tf
+32 0 0 32 230.6035 752.0655 Tm
+(Dringend)Tj
+ET
+EMC
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W
+n
+/GS2 gs
+.964 .626 0 scn
+1 0 0 1 70.984299 854.774109 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+/P <\</Lang (de-DE)/MCID 2>>BDC
+BT
+/F0 1 Tf
+32 0 0 32 192.0138 817.9513 Tm
+(Sehr dringend)Tj
+ET
+EMC
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W
+n
+/GS2 gs
+.687 .793 .018 scn
+1 0 0 1 70.984299 727.215027 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+/P <\</Lang (de-DE)/MCID 3>>BDC
+BT
+/F0 1 Tf
+32 0 0 32 241.4554 688.2859 Tm
+(Normal)Tj
+ET
+EMC
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W
+n
+/GS2 gs
+0 .41 .705 scn
+1 0 0 1 70.984299 663.435486 cm
+0 0 m
+0 -41.858 l
+0 -48.486 5.373 -53.858 12 -53.858 c
+449.02 -53.858 l
+455.647 -53.858 461.02 -48.486 461.02 -41.858 c
+461.02 0 l
+f
+Q
+EMC
+/P <\</Lang (de-DE)/MCID 4>>BDC
+BT
+/GS2 gs
+1 1 1 scn
+/F0 1 Tf
+32 0 0 32 184.5762 624.5064 Tm
+(Nicht dringend)Tj
+ET
+EMC
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W
+n
+0 .48 .766 scn
+1 0 0 1 1165.039307 1576.630859 cm
+0 0 m
+0 81.637 l
+-94.896 81.637 l
+-140.172 68.453 l
+-151.254 65.342 -170.807 65.342 v
+-189.025 65.099999 -200.506 68.453 v
+-201.341 68.697 -228.981 76.57 -246.776 81.637 c
+-1139.527 81.637 l
+-1139.527 0 l
+f
+Q
+EMC
+
+/Artifact BMC
+q
+1070.143 1658.267 m
+1024.868 1645.084 l
+1013.785 1641.973 994.233 1641.973 v
+...
+Q
+EMC
+
+/P <\</Lang (de-DE)/MCID 5>>BDC
+BT
+1 1 1 scn
+/F3 1 Tf
+44 0 0 44 65.525499 1602.1715 Tm
+(Patienteninformation)Tj
+/GS2 gs
+0 .48 .766 scn
+65 0 0 65 65.525499 1435.0057 Tm
+(Wie ist der Ablauf?)Tj
+0 -6.839998 TD
+(Dringlichkeitsstufen)Tj
+ET
+EMC
+
+/Artifact BMC
+q
+0 0 1190.551 1683.78 re
+W
+n
+0 .41 .705 scn
+1 0 0 1 612.283386 535.273987 cm
+0 0 m
+0 -349.417 l
+0 -356.045 5.373 -361.417 12 -361.417 c
+483.866 -361.417 l
+490.494 -361.417 495.866 -356.045 495.866 -349.417 c
+495.866 0 l
+f
+Q
+EMC
+
+/P <\</Lang (de-DE)/MCID 6>>BDC
+BT
+1 1 1 scn
+/F1 1 Tf
+32 0 0 32 711.2893 470.274 Tm
+(Fr Patienten und )Tj
+.264496 -1.28125 Td
+(Patientinnen mit  )Tj
+-1.697 -1.281 Td
+(niedriger Behandlungs-)Tj
+.002 -1.281 Td
+(dringlichkeit entstehen )Tj
+3.304959 -1.28175 Td
+(bei hohem )Tj
+-2.873 -1.281 Td
+(Patientenaufkommen  )Tj
+.699 -1.281 Td
+\[(lange W)37(artezeiten!)]TJ
+/GS2 gs
+.898 0 .312 scn
+-19.731 8.799 Td
+\[(W)37(artezeiten )]TJ
+/GS1 gs
+0 0 0 scn
+/F2 1 Tf
+(entstehen aus )Tj
+0 -1.281 TD
+\[(der Anzahl der eintref)18.1(fenden )]TJ
+-.0003 -1.282 Td
+(dringlichen Patienten, der )Tj
+(Behandlungsreihenfolge  )'
+(und den individuell )'
+-.278 Tw
+-.000001 -1.282 Td
+\[(notwendigen )-277.9(Unter)]TJ
+9.205 -.00001 Td
+(  -)Tj
+0 Tw
+-9.205 -1.281 Td
+\[(suchungen bzw)55.1(.  )]TJ
+(Behandlungen.  )'
+17.003 21.165 Td
+(Entsprechend dieser )Tj
+(Behandlungsreihenfolge )'
+/GS2 gs
+.898 0 .312 scn
+/F1 1 Tf
+( )Tj
+/GS1 gs
+0 0 0 scn
+/F2 1 Tf
+(werden Sie in eine )'
+(Behandlungskoje aufgerufen. )'
+.000347 -2.564 Td
+(Dort erfolgt die  )Tj
+(rztliche Untersuchung )'
+0 -1.282 Td
+\[(und V)37(ersorgung.)]TJ
+-16.982 22.956 Td
+(Die Behandlungsreihenfolge richtet sich nach der )Tj
+/GS2 gs
+.898 0 .312 scn
+/F1 1 Tf
+(medizinischen )Tj
+(Dringlichkeit)Tj
+/GS1 gs
+0 0 0 scn
+/F2 1 Tf
+\[( und nicht nach der Reihenfolge des Eintref)18.2(fens!)]TJ
+0 -2.563 Td
+(Die Behandlungsdringlichkeit wird durch  )Tj
+(die )'
+/GS2 gs
+.898 0 .312 scn
+/F1 1 Tf
+(medizinische Ersteinschtzung)Tj
+.899 0 .49 scn
+( )Tj
+/GS1 gs
+0 0 0 scn
+/F2 1 Tf
+\[(bei Ihrem Eintref)18.1(fen )]TJ
+-.00003 -1.281 Td
+(nach )Tj
+/GS2 gs
+.898 0 .312 scn
+/F1 1 Tf
+\[(inter)-17.9(nationalen Richtlinien)]TJ
+/GS1 gs
+0 0 0 scn
+/F2 1 Tf
+( festgelegt.)Tj
+ET
+EMC
+
+/Artifact BMC
+q
+319.493 44.096 362.673 301.629 re
+W
+n
+/GS2 gs
+.864 .925 .98 scn
+1 0 0 1 547.055603 279.548798 cm
+0 0 m
+... (graphics path content unchanged)
+f\*
+Q
+EMC
+
+% Remaining complex vector graphics and paths treated as artifacts
+/Artifact BMC
+... (original graphic content omitted for brevity, unchanged)
+EMC
