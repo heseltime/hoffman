@@ -1,0 +1,22 @@
+The text you've provided appears to be a mix of PostScript code, used for printing and creating graphics, and a snippet that includes information about an illustration source from iStockphoto.com. Let's break down the components:
+
+1. **PostScript Code**: The majority of your text is written in PostScript, a programming language used for describing the appearance of text and graphics on printed pages or display screens. This code controls how text and images are rendered. It includes commands for setting colors (`0 .48 .766 scn`), selecting fonts (`/F3 1 Tf`), adjusting text spacing (`-.153 Tw`), positioning text on the page (`12 0 0 12 235.4184 74.8764 Tm`), and printing text (`TJ` operator followed by text enclosed in parentheses or other delimiters).
+
+2. **Text and Font Instructions**: Within this PostScript code, there are instructions for displaying specific text:
+   - `12 0 0 12 235.4184 74.8764 Tm`: This moves the current point (where text will start being drawn) to a specific location on the page.
+   - `/F3 1 Tf`: This selects font `F3` at size 1 unit for subsequent text operations. The actual appearance of this font depends on its definition elsewhere in the PostScript code or document setup.
+   - `-.153 Tw`: Adjusts the word spacing by a negative amount, effectively bringing words closer together horizontally.
+
+3. **Illustration Source Information**: 
+   - The string `(Illustration )-152.9<a9>( iStockphoto.com)( )(/)( Jamie )-153(Lee )` contains information about an illustration:
+     - `Illustration`: Indicates the content is an illustration.
+     - `iStockphoto.com`: Suggests that the illustration was sourced from iStock, a popular online platform for stock images and illustrations.
+     - `/`: A separator or indicator within the credit line, possibly separating different components of the source information.
+     - `Jamie Lee`: Could refer to the artist, photographer, or contributor who created the illustration.
+
+4. **ET (End Text)**: The `ET` command ends a text object in PostScript, indicating that all subsequent commands are not part of the current text block.
+
+5. **Q**: This is typically used at the end of a PostScript file to signal its end and is part of how some PostScript interpreters know when they've reached the conclusion of the document or graphic description.
+
+This mix of code seems to be part of a larger document preparation or printing workflow, possibly from a publishing or graphic design context where illustrations are being credited in accordance with licensing agreements.
+endstream
