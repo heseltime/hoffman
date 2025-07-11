@@ -52,7 +52,7 @@ LIMIT_LINES = os.getenv("LIMIT_LINES", "False").lower() == "true"
 LINES_LIMIT = int(os.getenv("LINES_LIMIT", "1000"))
 EXAMPLE_DIR = Path(os.getenv("EXAMPLE_DIR", "./examples"))
 
-LLM_HTTP_TIMEOUT = int(os.getenv("LLM_HTTP_TIMEOUT", "300")) # 5 min default
+LLM_HTTP_TIMEOUT = int(os.getenv("LLM_HTTP_TIMEOUT", "600"))
 
 logger.info("🤖 Using LLM model: %s", LLM_NAME)
 logger.info("🔧 LIMIT_LINES=%s, LINES_LIMIT=%d", LIMIT_LINES, LINES_LIMIT)
@@ -163,6 +163,25 @@ def call_llm_generate_streams(
     raise RuntimeError("LLM failed to produce valid stream content in allotted retries.")
 
 
+def _escape_pdf_text(txt: str) -> str:
+    """Escape ( ) \\ in a PDF text string."""
+    return txt.replace("\\", r"\\").replace("(", r"\(").replace(")", r"\)")
+
+def _wrap_plain_text_as_stream(txt: str, font_obj: int = 0) -> str:
+    """Return a complete content-stream object for a block of plain text."""
+    leading = 14          # line spacing (points)
+    start_x, start_y = 50, 750  # left & first baseline
+
+    pieces = [f"BT /F1 12 Tf {start_x} {start_y} Td"]
+    for line in txt.splitlines():
+        pieces.append(f"({_escape_pdf_text(line)}) Tj")
+        pieces.append(f"0 {-leading} Td")  # move down
+    pieces.append("ET")
+    commands = "\n".join(pieces) + "\n"
+
+    length = len(commands.encode("latin-1"))
+    return f"<< /Length {length} >>\nstream\n{commands}endstream\nendobj"
+
 def build_full_pdf_from_streams(
     streams: List[str],
     output_path: str,
@@ -170,17 +189,92 @@ def build_full_pdf_from_streams(
     limit_lines: bool = False,
     max_lines: int = 1000,
 ) -> None:
-    pdf = FPDF()
-    pdf.set_font("Helvetica", size=12)
-    for s in streams:
-        pdf.add_page()
-        lines = s.splitlines()
-        if limit_lines:
-            lines = lines[:max_lines]
-        for line in lines:
-            pdf.cell(0, 10, line[:100], ln=True)
-    pdf.output(output_path)
-    logger.info("📄 Accessible PDF written to: %s", output_path)
+    """
+    Turn each string in *streams* into a page in a minimalist PDF.
+
+    * If the string already contains a `stream ... endstream`, it's used verbatim.
+    * Otherwise it's treated as plain text (optionally truncated to *max_lines*).
+
+    The file is written to *output_path* ('.pdf' appended automatically if missing).
+    """
+    if not output_path.lower().endswith(".pdf"):
+        output_path += ".pdf"
+
+    N = len(streams)
+    header = ["%PDF-1.4\n%\xE2\xE3\xCF\xD3\n"]  # binary chars make Adobe happy
+    objs: list[str] = []
+
+    # --- 1 0 obj: Catalog ---
+    objs.append("1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n")
+    # --- 2 0 obj: Pages node (Kids filled later) ---
+    kids_placeholder = "<< /Type /Pages /Kids [KIDS] /Count {} >>".format(N)
+    objs.append(f"2 0 obj\n{kids_placeholder}\nendobj\n")
+
+    # Build page/content/font triples
+    kid_refs: list[str] = []
+    for i, raw in enumerate(streams):
+        page_id   = 3 + i * 3
+        cont_id   = page_id + 1
+        font_id   = page_id + 2
+        kid_refs.append(f"{page_id} 0 R")
+
+        # --- Page object ---
+        objs.append(
+            f"{page_id} 0 obj\n"
+            "<< /Type /Page /Parent 2 0 R\n"
+            "   /MediaBox [0 0 612 792]\n"
+            f"   /Contents {cont_id} 0 R\n"
+            f"   /Resources << /Font << /F1 {font_id} 0 R >> >>\n"
+            ">>\nendobj\n"
+        )
+
+        # --- Content object ---
+        # Decide whether raw already contains a complete stream
+        if "stream" in raw and "endstream" in raw:
+            # Assume user provided the entire object WITHOUT the "obj" header/trailer
+            stream_obj = f"{cont_id} 0 obj\n{raw.strip()}\nendobj"
+        else:
+            # Plain text path
+            if limit_lines:
+                raw = "\n".join(raw.splitlines()[:max_lines])
+            stream_obj = f"{cont_id} 0 obj\n{_wrap_plain_text_as_stream(raw)}"
+        objs.append(stream_obj + "\n")
+
+        # --- Font object (built-in Helvetica) ---
+        objs.append(
+            f"{font_id} 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n"
+        )
+
+    # Replace placeholder Kids list
+    objs[1] = objs[1].replace("KIDS", " ".join(kid_refs))
+
+    # Assemble file while recording offsets
+    xref_offsets = [0]  # index 0 is the free object
+    pdf_buf = "".join(header)
+    for obj in objs:
+        xref_offsets.append(len(pdf_buf.encode("latin-1")))
+        pdf_buf += obj
+
+    # Cross-reference table
+    startxref = len(pdf_buf.encode("latin-1"))
+    pdf_buf += f"xref\n0 {len(xref_offsets)}\n"
+    pdf_buf += "0000000000 65535 f \n"
+    for off in xref_offsets[1:]:
+        pdf_buf += f"{off:010d} 00000 n \n"
+
+    # Trailer & EOF
+    pdf_buf += (
+        "trailer\n"
+        f"<< /Size {len(xref_offsets)} /Root 1 0 R >>\n"
+        f"startxref\n{startxref}\n%%EOF\n"
+    )
+
+    # Write out
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    with open(output_path, "wb") as f:
+        f.write(pdf_buf.encode("latin-1"))
+
+    logger.info("📦 Minimal PDF written to: %s", output_path)
 
 
 def collect_example_pairs(
