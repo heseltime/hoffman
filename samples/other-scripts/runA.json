@@ -1,0 +1,8 @@
+{
+  "bleu": 0,
+  "rouge_l": 0.0,
+  "meteor": 0.0,
+  "edit_distance": 23618,
+  "ref_length_chars": 931,
+  "hyp_length_chars": 23848
+}
